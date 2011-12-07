@@ -13,7 +13,6 @@ Upcloo_Manager::setCredential("username", "sitekey", "password", ...);
 ```
 
 ### Publish method
-
 When you want to put a content 
 
 ```php
@@ -41,7 +40,6 @@ UpCloo_Manager::index(
 ```
 
 ### Retrive indexed content
-
 Retrive and indexed content or ask for it...
 
 ```php
@@ -49,5 +47,6 @@ Retrive and indexed content or ask for it...
 // Get related contents from main sitekey
 $correlation = UpCloo_Manager::get("post_124");
 
+// Get a related contents from a virtual sitekey
 $correlation = UpCloo_Manager:.get("post_124", $virtualSiteKey);
 ```
