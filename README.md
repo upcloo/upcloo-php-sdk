@@ -47,6 +47,6 @@ Retrive and indexed content or ask for it...
 // Get related contents from main sitekey
 $correlation = UpCloo_Manager::get("post_124");
 
-// Get a related contents from a virtual sitekey
+// Get related contents from a virtual sitekey
 $correlation = UpCloo_Manager:.get("post_124", $virtualSiteKey);
 ```
