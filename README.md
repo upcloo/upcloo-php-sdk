@@ -12,7 +12,7 @@ Set up the sitekey, username and password before use the library
 Upcloo_Manager::setCredential("username", "sitekey", "password", ...);
 ```
 
-### Publish method
+### Publish method - index new contents or updates
 When you want to put a content 
 
 ```php
@@ -39,7 +39,7 @@ UpCloo_Manager::index(
 );
 ```
 
-### Retrive indexed content
+### Retrive indexed contents
 Retrive and indexed content or ask for it...
 
 ```php
@@ -50,3 +50,23 @@ $correlation = UpCloo_Manager::get("post_124");
 // Get related contents from a virtual sitekey
 $correlation = UpCloo_Manager:.get("post_124", $virtualSiteKey);
 ```
+
+### Related models
+
+The concept of SDK is to provide supports for merge operation of different requests
+and other features.
+
+ * Using models as arrays
+ * Merge operation of different requests
+ 
+```php
+<?php
+// Mix responses with a rule
+$mixed = UpCloo_Manager::mix($model, ..., UpCloo_Manager::RANDOM);
+```
+
+Merge operation support different mixing:
+
+ * Random mix
+ * Order mix
+ * Reverse order mix 
