@@ -61,6 +61,10 @@ class UpCloo_Manager
      */
     private $_virtualSitekeys = false;
     
+    const UPDATE_END_POINT = 'http://%s.update.upcloo.com';
+    const REPOSITORY = 'http://repository.upcloo.com/%s';
+    const REPOSITORY_V = self::REPOSITORY . '/%s';
+    
     protected function __construct() {}
     
     /**
@@ -68,18 +72,25 @@ class UpCloo_Manager
      * 
      * @return UpCloo_Manager The instance
      */
-    public static function getInstance($client = false)
+    public static function getInstance()
     {
         if (!self::$_instance) {
             self::$_instance = new self();
             
-            //Used for mocking the client layer
-            if ($client) {
-                $this->_client = $client;
-            }
+            //TODO: set the default client
         }
         
         return self::$_instance;
+    }
+    
+    public function setClient($client)
+    {
+        $this->_client = $client;
+    }
+    
+    public function getClient()
+    {
+        return $this->_client;
     }
     
     /**
