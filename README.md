@@ -25,7 +25,7 @@ UpCloo_Manager::index(
         'title' => 'title',                     //Your title
         'summary' => 'this is summary',         //Summary
         'image' => 'http://pro.ltd/link.png',   //Image link
-        'link' => 'http:pro.ltd/link',          //The link
+        'link' => 'http://pro.ltd/link',          //The link
         'tags' => array(                        //List of tags
             'example',
             'another'
@@ -63,6 +63,13 @@ and other features.
 <?php
 // Mix responses with a rule
 $mixed = UpCloo_Manager::mix($model, ..., UpCloo_Manager::RANDOM);
+
+// Mix responses with a rule and limit each model on two elements
+$mixed = UpCloo_Manager::mix($model, ..., UpCloo_Manager::RANDOM, 2);
+
+// Mix responses with a rule and limit models
+$mixed = UpCloo_Manager::mix($model, ..., UpCloo_Manager::RANDOM, array(2, 5, 2));
+
 ```
 
 Merge operation support different mixing:
@@ -70,3 +77,4 @@ Merge operation support different mixing:
  * Random mix
  * Order mix
  * Reverse order mix 
+ * Order by a field
