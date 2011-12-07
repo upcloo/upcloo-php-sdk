@@ -50,31 +50,3 @@ $correlation = UpCloo_Manager::get("post_124");
 // Get related contents from a virtual sitekey
 $correlation = UpCloo_Manager:.get("post_124", $virtualSiteKey);
 ```
-
-### Related models
-
-The concept of SDK is to provide supports for merge operation of different requests
-and other features.
-
- * Using models as arrays
- * Merge operation of different requests
- 
-```php
-<?php
-// Mix responses with a rule
-$mixed = UpCloo_Manager::mix($model, ..., UpCloo_Manager::RANDOM);
-
-// Mix responses with a rule and limit each model on two elements
-$mixed = UpCloo_Manager::mix($model, ..., UpCloo_Manager::RANDOM, 2);
-
-// Mix responses with a rule and limit models
-$mixed = UpCloo_Manager::mix($model, ..., UpCloo_Manager::RANDOM, array(2, 5, 2));
-
-```
-
-Merge operation support different mixing:
-
- * Random mix
- * Order mix
- * Reverse order mix 
- * Order by a field
