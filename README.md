@@ -3,6 +3,8 @@
 ## Proposal
 This is the proposal for implementation
 
+ **Consider that this schema is only a conceptual one schema (source use Singleton d.p.).**
+
 ### Boot the library
 Set up the sitekey, username and password before use the library
 
