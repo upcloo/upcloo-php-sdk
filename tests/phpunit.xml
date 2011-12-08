@@ -20,6 +20,7 @@
         <testsuite name="UpCloo SDK Suite">
             <directory></directory>
             <file>BaseTest.php</file>
+            <file>ModelTest.php</file>
         </testsuite>
     </testsuites>
     <logging>

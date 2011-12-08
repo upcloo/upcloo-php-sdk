@@ -6,3 +6,4 @@ set_include_path(implode(PATH_SEPARATOR,  array(
 )));
 
 require_once 'UpCloo/Manager.php';
+require_once 'UpCloo/Model/Base.php';
