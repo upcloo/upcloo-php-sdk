@@ -35,12 +35,12 @@ class Compiler
         $phar->addFile("autoload.php");
         
         $this->_addDir(
-            $phar, 
-            dirname(__FILE__), 
-            realpath(dirname(__FILE__)."/../../") . "/",
-        	"php"
+        $phar,
+            realpath(dirname(__FILE__) . '/../../../src/UpCloo'),
+            realpath(dirname(__FILE__) . '/../../../src') . '/',
+            'php'
         );
-
+        
         //Loader
         $phar->addFile(dirname(__FILE__) . '/../../../vendor/zend/Zend/Loader.php', 'Zend/Loader.php');
         $this->_addDir(
@@ -59,6 +59,7 @@ class Compiler
         );
         
         //Uri
+        $phar->addFile(dirname(__FILE__) . '/../../../vendor/zend/Zend/Uri.php', 'Zend/Uri.php');
         $this->_addDir(
             $phar,
             realpath(dirname(__FILE__) . '/../../../vendor/zend/Zend/Uri'),
@@ -74,7 +75,7 @@ class Compiler
             'php'
         );
         
-        $phar->addFile(realpath(dirname(__FILE__) . "/../../LICENSE"));
+        $phar->addFile(realpath(dirname(__FILE__) . "/../../LICENSE"), "LICENSE");
         
         $phar->setStub($this->getStub());
         
