@@ -33,7 +33,7 @@ class UpCloo_Model_Base
     private $_position = 0;
     protected $_container = array();
     
-    //ArrayAccess
+    
     public function __construct() {
         $this->_position = 0;
         $this->_container = array();
@@ -78,8 +78,12 @@ class UpCloo_Model_Base
     public function valid() {
         return isset($this->_container[$this->_position]);
     }
-    
-    //Countable
+
+    /**
+     * Count elements
+     * 
+     * @return int The number of elements
+     */
     public function count() {
         return count($this->_container);
     }
@@ -96,6 +100,11 @@ class UpCloo_Model_Base
         return $this->_asXml(array("model" => $this->_container));
     }
     
+    /**
+     * Convert this model to XML representation
+     * 
+     * @param array $model
+     */
     private function _asXml($model)
     {
         if (is_string($model)) {
@@ -115,6 +124,11 @@ class UpCloo_Model_Base
         }
     }
     
+    /**
+     * Retrive the string object representation
+     * 
+     * @return string The XML string representation
+     */
     public function __toString()
     {
         return $this->asXml();
