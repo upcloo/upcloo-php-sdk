@@ -1,0 +1,19 @@
+#!/usr/bin/env php
+<?php
+
+set_include_path(implode(PATH_SEPARATOR,  array(
+    realpath(dirname(__FILE__) . '/../src'),
+    realpath(dirname(__FILE__) . '/../vendor/zend'),
+    realpath(dirname(__FILE__) . '/../vendor/php-file-iterator'),
+    get_include_path(),
+)));
+
+require_once 'autoload.php';
+
+$loader = Zend_Loader_Autoloader::getInstance();
+$loader->registerNamespace("File_");
+
+require_once dirname(__FILE__) . '/Corley/UpCloo/Compiler.php';
+
+$compiler = new \Corley\UpCloo\Compiler();
+$compiler->compile();
