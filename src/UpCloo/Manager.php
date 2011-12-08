@@ -221,13 +221,12 @@ class UpCloo_Manager
         //TODO: fill
     }
     
+
     /**
-     * Retrive content
      * 
-     * @param string $id
-     * @param string $virtualSiteKey
-     * 
-     * @todo Complete this statement
+     * Enter description here ...
+     * @param unknown_type $id
+     * @param unknown_type $virtualSiteKey
      */
     public function get($id, $virtualSiteKey = false)
     {
