@@ -23,6 +23,22 @@ $manager->index(
 $manager->get("1243");
 ```
 
+## Use the PHAR package
+
+First of all download the latest phar archive from the download section.
+After that you can use as this:
+
+```php
+<?php 
+require_once 'upcloo-sdk.phar';
+
+$manager = UpCloo_Manager::getInstance();
+$manager->setCredential("username", "sitekey", "password");
+
+```
+
+Consider that the PHAR archive autoload all the library by it self.
+
 ## Running Tests & Reports
 
 If you want to run tests and get the reports of coverage you can
