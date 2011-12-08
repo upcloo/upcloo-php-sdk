@@ -105,7 +105,7 @@ class UpCloo_Manager
 
         $this->setUsername($username);
         $this->setSiteKey($sitekey);
-        $this->setPasword($password);
+        $this->setPassword($password);
         
         array_shift($args);
         array_shift($args);
