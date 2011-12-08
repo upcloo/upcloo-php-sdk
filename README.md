@@ -22,3 +22,24 @@ $manager->index(
 //Get correlation of the indexed content
 $manager->get("1243");
 ```
+
+## Running Tests & Reports
+
+If you want to run tests and get the reports of coverage you can
+simply use the ```phpunit```.
+
+For more information on ```phpunit``` consider 
+[the project page](http://www.phpunit.de/manual/current/en/) 
+
+```
+$ phpunit
+PHPUnit 3.5.15 by Sebastian Bergmann.
+
+.......
+
+Time: 1 second, Memory: 4.50Mb
+
+OK (7 tests, 20 assertions)
+
+Generating code coverage report, this may take a moment.
+```
