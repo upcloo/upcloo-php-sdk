@@ -72,4 +72,25 @@ class ModelTest extends PHPUnit_Framework_TestCase
 
         $this->assertEquals("walter", $model["title"]);
     }
+    
+    public function testArrayMethods()
+    {
+        $model = new UpCloo_Model_Base();
+        $model["title"] = "walter";
+        $model["eg"] = "example";
+        
+        $this->assertSame(2, count($model));
+        
+        $model["one"] = "The one element";
+        
+        $this->assertSame(3, count($model));
+        
+        $this->assertFalse($model->offsetExists(4));
+        
+        $model[5] = 'five';
+        $this->assertEquals("five", $model[5]);
+        
+        unset($model[5]);
+        $this->assertNull($model[5]);
+    }
 }
