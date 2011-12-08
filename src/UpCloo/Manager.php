@@ -131,6 +131,11 @@ class UpCloo_Manager
         return $this;
     }
     
+    public function getVirtualSiteKeys()
+    {
+        return $this->_virtualSitekeys;
+    }
+    
     /**
      * Set the Username 
      *
