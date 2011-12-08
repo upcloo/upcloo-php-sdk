@@ -12,7 +12,7 @@ require_once 'upcloo-sdk.phar';
 $manager = UpCloo_Manager::getInstance();
 $manager->setCredential("username", "sitekey", "password");
 
-$manager->get("135");
+$results = $manager->get("135");
 ```
 
 ## Engage the packager
