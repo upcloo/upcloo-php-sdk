@@ -83,6 +83,9 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
             $uri .= "/%s";
             $uri = sprintf($uri, $vsitekey);
         }
+        $uri .= "/{$id}.xml";
+        $this->_client->setUri($uri);
+        
         $xml = $this->_getFromRepository($uri);
         
         $elements = simplexml_load_string($xml);
@@ -107,9 +110,8 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
      * 
      * @return array
      */
-    protected function _getFromRepository($uri)
+    protected function _getFromRepository()
     {
-        $this->_client->setUri($uri);
         $response = $this->_client->request("get");
         
         if ($response->getStatus() == 200) {
@@ -137,5 +139,10 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
     public function getSiteKey()
     {
         return $this->_sitekey;
+    }
+    
+    public function getUri()
+    {
+        return $this->_client->getUri(true);
     }
 }
