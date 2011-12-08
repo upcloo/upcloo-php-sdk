@@ -63,7 +63,6 @@ class UpCloo_Manager
     
     const UPDATE_END_POINT = 'http://%s.update.upcloo.com';
     const REPOSITORY = 'http://repository.upcloo.com/%s';
-    const REPOSITORY_V = self::REPOSITORY . '/%s';
     
     protected function __construct() {}
     
