@@ -10,6 +10,7 @@ boot the library manually.
 require_once 'upcloo-sdk.phar';
 
 $manager = UpCloo_Manager::getInstance();
+$manager->setCredential("username", "sitekey", "password");
 
 $manager->get("135");
 ```
