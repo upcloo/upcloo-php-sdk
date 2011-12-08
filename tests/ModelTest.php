@@ -92,5 +92,9 @@ class ModelTest extends PHPUnit_Framework_TestCase
         
         unset($model[5]);
         $this->assertNull($model[5]);
+        
+        $model[] = "helloooo";
+        $this->assertSame(4, count($model));
+        $this->assertSame("helloooo", $model[6]);
     }
 }
