@@ -208,13 +208,17 @@ class UpCloo_Manager
     /**
      * Index new contents or update
      * 
-     * @param array $model
+     * @param array|UpCloo_Model_Base $model
      * 
      * @todo complete this method
      */
-    public function index(array $model)
+    public function index($model)
     {
+        if (is_array($model)) {
+            $model = UpCloo_Model_Base::fromArray($model);
+        }
         
+        //TODO: fill
     }
     
     /**

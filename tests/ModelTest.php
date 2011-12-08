@@ -60,4 +60,16 @@ class ModelTest extends PHPUnit_Framework_TestCase
         $expected = "<model><title><![CDATA[walter]]></title></model>";
         $this->assertEquals($expected, (string)$model);
     }
+    
+    public function testFromArray()
+    {
+        $model = array();
+        $model["title"] = "walter";
+        
+        $model = UpCloo_Model_Base::fromArray($model);
+        
+        $this->assertInstanceOf("UpCloo_Model_Base", $model);
+
+        $this->assertEquals("walter", $model["title"]);
+    }
 }

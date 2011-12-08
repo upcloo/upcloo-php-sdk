@@ -100,6 +100,11 @@ class UpCloo_Model_Base
         return $this->_asXml(array("model" => $this->_container));
     }
     
+    protected function _setContainer(array $container)
+    {
+        $this->_container = $container;
+    }
+    
     /**
      * Convert this model to XML representation
      * 
@@ -132,5 +137,14 @@ class UpCloo_Model_Base
     public function __toString()
     {
         return $this->asXml();
+    }
+    
+    public static function fromArray(array $model)
+    {
+        $m = new self();
+        $m->_setContainer($model);
+        $m->rewind();
+        
+        return $m;
     }
 }
