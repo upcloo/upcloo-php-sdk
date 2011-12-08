@@ -76,7 +76,7 @@ MAO
         
         $this->assertTrue($this->_instance->index($model));
         
-        $this->assertEquals("username", $this->_instance->getClient()->getUsername());
+        $this->assertEquals("http://username.update.upcloo.com:80", $this->_instance->getClient()->getUri());
         
         $model = array();
         $model["id"] = 15;

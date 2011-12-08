@@ -53,13 +53,13 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
         if (!$model["id"]) {
             throw new UpCloo_Model_Exception("You must provide the content id");
         }
+        $this->_client->setUri(sprintf(UpCloo_Manager::UPDATE_END_POINT, $this->getUsername()));
         
         return $this->_index($model);
     }
     
     protected function _index($model)
     {
-        $this->_client->setUri(sprintf(UpCloo_Manager::UPDATE_END_POINT, $this->getUsername()));
         $this->_client->setRawData($model->asXml());
         
         $response = $this->_client->request("put");
