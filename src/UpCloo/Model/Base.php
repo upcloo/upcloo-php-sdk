@@ -28,14 +28,12 @@
  * SOFTWARE.
  */
 class UpCloo_Model_Base
-    implements ArrayAccess, Iterator, Countable
+    implements ArrayAccess, Countable
 {
-    private $_position = 0;
     protected $_container = array();
     
     
     public function __construct() {
-        $this->_position = 0;
         $this->_container = array();
     }
     
@@ -57,26 +55,6 @@ class UpCloo_Model_Base
     
     public function offsetGet($offset) {
         return isset($this->_container[$offset]) ? $this->_container[$offset] : null;
-    }
-    
-    public function rewind() {
-        $this->_position = 0;
-    }
-    
-    public function current() {
-        return $this->_container[$this->_position];
-    }
-    
-    public function key() {
-        return $this->_position;
-    }
-    
-    public function next() {
-        ++$this->_position;
-    }
-    
-    public function valid() {
-        return isset($this->_container[$this->_position]);
     }
 
     /**
@@ -143,7 +121,6 @@ class UpCloo_Model_Base
     {
         $m = new self();
         $m->_setContainer($model);
-        $m->rewind();
         
         return $m;
     }
