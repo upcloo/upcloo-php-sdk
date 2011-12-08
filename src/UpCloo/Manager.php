@@ -252,6 +252,8 @@ class UpCloo_Manager
      */
     public function get($id, $virtualSiteKey = false)
     {
+        $this->_client->setSiteKey($this->getSiteKey());
         
+        return $this->_client->get($id, $virtualSiteKey);
     }
 }

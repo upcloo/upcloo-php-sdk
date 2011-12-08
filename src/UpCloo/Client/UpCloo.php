@@ -36,6 +36,9 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
      */
     private $_client;
     
+    private $_username;
+    private $_sitekey;
+    
     public function __construct()
     {
         $this->_client = new Zend_Http_Client();
@@ -72,12 +75,48 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
     {
         $model = new UpCloo_Model_Base();
         
-        return $model;
+        $uri = '';
+        if (!$vsitekey) {
+            $uri = sprintf(UpCloo_Manager::REPOSITORY, $this->getSiteKey());
+        } else {
+            $uri = sprintf(UpCloo_Manager::REPOSITORY, $this->getSiteKey());
+            $uri .= "/%s";
+            $uri = sprintf($uri, $vsitekey);
+        }
+        $xml = $this->_getFromRepository($uri);
+        
+        $elements = simplexml_load_string($xml);
+        
+        $results = array();
+        if ($elements->doc) {
+            foreach ($elements->doc as $element) {
+                $model = new UpCloo_Model_Base();
+                $model["title"] = (string)$element->title;
+                
+                $results[] = $model;
+            }
+        } 
+        
+        return $results;
     }
     
-    protected function _getFromRepository(Zend_Uri_Http $uri)
+    /**
+     * Retrive from repo
+     * 
+     * @param string $uri
+     * 
+     * @return array
+     */
+    protected function _getFromRepository($uri)
     {
+        $this->_client->setUri($uri);
+        $response = $this->_client->request("get");
         
+        if ($response->getStatus() == 200) {
+            return $response->getBody();
+        } else {
+            return array();
+        }
     }
     
     public function setUsername($username)
@@ -88,5 +127,15 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
     public function getUsername()
     {
         return $this->_username;
+    }
+    
+    public function setSiteKey($sitekey)
+    {
+        $this->_sitekey = $sitekey;
+    }
+    
+    public function getSiteKey()
+    {
+        return $this->_sitekey;
     }
 }
