@@ -76,7 +76,10 @@ class UpCloo_Manager
         if (!self::$_instance) {
             self::$_instance = new self();
             
-            //TODO: set the default client
+            //Default set the client
+            self::$_instance->setClient(
+                new UpCloo_Client_UpCloo()
+            );
         }
         
         return self::$_instance;
@@ -87,6 +90,11 @@ class UpCloo_Manager
         $this->_client = $client;
     }
     
+    /**
+     * Retrive the Client
+     * 
+     * @return UpCloo_Client_UpCloo
+     */
     public function getClient()
     {
         return $this->_client;
@@ -131,6 +139,11 @@ class UpCloo_Manager
         return $this;
     }
     
+    /**
+     * Get the sitekeys list 
+     * 
+     * @return array The list of virtual site keys
+     */
     public function getVirtualSiteKeys()
     {
         return $this->_virtualSitekeys;
@@ -198,7 +211,7 @@ class UpCloo_Manager
     /**
      * Retrive the actual password
      * 
-     * return string The password
+     * @return string The password
      */
     public function getPassword()
     {
@@ -209,8 +222,10 @@ class UpCloo_Manager
      * Index new contents or update
      * 
      * @param array|UpCloo_Model_Base $model
+     *
+     * @return boolean The result of operation.
      * 
-     * @todo complete this method
+     * @throws UpCloo_Model_Exception In case of errors
      */
     public function index($model)
     {
@@ -218,15 +233,22 @@ class UpCloo_Manager
             $model = UpCloo_Model_Base::fromArray($model);
         }
         
-        //TODO: fill
+        $model["password"] = $this->getPassword();
+        $model["sitekey"] = $this->getSiteKey();
+        
+        $this->getClient()->setUsername($this->getUsername());
+        
+        return $this->getClient()->index($model);
     }
     
 
     /**
      * 
-     * Enter description here ...
-     * @param unknown_type $id
-     * @param unknown_type $virtualSiteKey
+     * 
+     * @param string $id
+     * @param string $virtualSiteKey
+     * 
+     * @return array The list of results 
      */
     public function get($id, $virtualSiteKey = false)
     {

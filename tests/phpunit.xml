@@ -21,6 +21,8 @@
             <directory></directory>
             <file>BaseTest.php</file>
             <file>ModelTest.php</file>
+            <file>UpClooClientTest.php</file>
+            <file>ManagerTest.php</file>
         </testsuite>
     </testsuites>
     <logging>
