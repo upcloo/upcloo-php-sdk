@@ -91,7 +91,7 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
         $elements = simplexml_load_string($xml);
         
         $results = array();
-        if ($elements->doc) {
+        if ($elements && $elements->doc) {
             foreach ($elements->doc as $element) {
                 $model = new UpCloo_Model_Base();
                 $model["title"] = (string)$element->title;
