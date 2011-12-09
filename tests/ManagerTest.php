@@ -3,6 +3,12 @@ class ManagerTest extends PHPUnit_Framework_TestCase
 {
     private $_instance;
     
+    /**
+     * SetUp
+     * 
+     * The first 4 index method goes on, next one fails
+     * 
+     */
     public function setUp()
     {
         $this->_instance = UpCloo_Manager::getInstance();
@@ -11,7 +17,7 @@ class ManagerTest extends PHPUnit_Framework_TestCase
         
         $stub->expects($this->any())
             ->method('_index')
-            ->will($this->returnValue(true));
+            ->will($this->onConsecutiveCalls(true, true, true, true, false));
         
         $stub->expects($this->any())
             ->method('_getFromRepository')
@@ -61,7 +67,7 @@ EOF
 	</doc>
 </docs>
 MAO
-, "<docs/>"
+, "<docs/>", ""
 ));
         
         $this->_instance->setCredential("username", "sitekey", "password");
@@ -135,6 +141,40 @@ MAO
         $this->assertEquals(2, count($results));
         
         $results = $this->_instance->get("1204", "vsite");
+        $this->assertInternalType("array", $results);
+        $this->assertEquals(0, count($results));
+    }
+    
+    public function testNotIndexed()
+    {
+        $stub = $this->getMock("UpCloo_Client_UpCloo", array('_index'));
+        
+        $stub->expects($this->any())
+            ->method('_index')
+            ->will($this->onConsecutiveCalls(false));
+            
+        $this->_instance->setCredential("username", "sitekey", "password");
+        $this->_instance->setClient($stub);
+        
+    	$model = new UpCloo_Model_Base();
+        $model["id"] = 5;
+        $model["title"] = "HEllo";
+        
+        $this->assertFalse($this->_instance->index($model));
+    }
+    
+    public function testEmptyResponse()
+    {
+    	$stub = $this->getMock("UpCloo_Client_UpCloo", array('_getFromRepository'));
+        
+        $stub->expects($this->any())
+            ->method('_getFromRepository')
+            ->will($this->onConsecutiveCalls(""));
+            
+        $this->_instance->setCredential("username", "sitekey", "password");
+        $this->_instance->setClient($stub);
+        
+    	$results = $this->_instance->get("15");
         $this->assertInternalType("array", $results);
         $this->assertEquals(0, count($results));
     }
