@@ -29,6 +29,24 @@
  */
 class UpCloo_Manager
 {
+    /**
+     * The update end point
+     * 
+     * @var string
+     */
+    const UPDATE_END_POINT = 'http://%s.update.upcloo.com';
+    /**
+     * The repository
+     * 
+     * @var string
+     */
+    const REPOSITORY = 'http://repository.upcloo.com/%s';
+    
+    /**
+     * The single instance
+     * 
+     * @var UpCloo_Manager
+     */
     private static $_instance = false;
     
     /**
@@ -61,10 +79,16 @@ class UpCloo_Manager
      */
     private $_virtualSitekeys = false;
     
-    const UPDATE_END_POINT = 'http://%s.update.upcloo.com';
-    const REPOSITORY = 'http://repository.upcloo.com/%s';
-    
+    /**
+     * Constructor is protected for singleton pattern
+     * 
+     */
     protected function __construct() {}
+    
+    /**
+     * Clone is not supported 
+     */
+    public function __clone(){}
     
     /**
      * Retrive the instance
@@ -85,6 +109,11 @@ class UpCloo_Manager
         return self::$_instance;
     }
     
+    /**
+     * Set up the client
+     * 
+     * @param UpCloo_Client_ClientInterface $client
+     */
     public function setClient($client)
     {
         $this->_client = $client;

@@ -36,12 +36,31 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
      */
     private $_client;
     
+    /**
+     * The username
+     * 
+     * @var string The username
+     */
     private $_username;
+    
+    /**
+     * The sitekey
+     * 
+     * @var string The sitekey
+     */
     private $_sitekey;
     
-    public function __construct()
+    /**
+     * Client constructor
+     * 
+     * Create the default client.
+     * 
+     */
+    public function __construct($client = false)
     {
-        $this->_client = new Zend_Http_Client();
+        if (!$client) {
+            $this->_client = new Zend_Http_Client();
+        }
     }
     
     /**
@@ -121,26 +140,52 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
         }
     }
     
+    /**
+     * Set the username
+     * 
+     * @param string $username
+     */
     public function setUsername($username)
     {
         $this->_username = $username;
     }
     
+    /**
+     * Retrive the username
+     * 
+     * @return string The username
+     */
     public function getUsername()
     {
         return $this->_username;
     }
     
+    /**
+     * Set the site key
+     * 
+     * @param string $sitekey
+     */
     public function setSiteKey($sitekey)
     {
         $this->_sitekey = $sitekey;
     }
     
+    /**
+     * 
+     * Retrive the site key
+     * 
+     * @return string The site key
+     */
     public function getSiteKey()
     {
         return $this->_sitekey;
     }
     
+    /**
+     * Retrive the uri of latest request
+     * 
+     * @return string;
+     */
     public function getUri()
     {
         return $this->_client->getUri(true);

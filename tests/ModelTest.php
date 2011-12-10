@@ -29,6 +29,21 @@
  */
 class ModelTest extends PHPUnit_Framework_TestCase
 {
+    public function testBaseId()
+    {
+        $model = new UpCloo_Model_Base(5);
+        
+        $this->assertEquals(5, $model["id"]);
+        
+        $model = new UpCloo_Model_Base("testMe");
+        
+        $this->assertEquals("testMe", $model["id"]);
+        
+        $model = new UpCloo_Model_Base();
+        
+        $this->assertNull($model["id"]);
+    }
+    
     public function testSimpleXml()
     {
         $model = new UpCloo_Model_Base();

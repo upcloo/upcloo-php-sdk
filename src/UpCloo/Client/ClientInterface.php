@@ -44,7 +44,8 @@ interface UpCloo_Client_ClientInterface
      * @param string|int $id
      * @param string $vsitekey
      * 
-     * @return UpCloo_Model_Base
+     * @return array A list of  object
+     * @see UpCloo_Model_Base
      */
     public function get($id, $vsitekey = false);
 }

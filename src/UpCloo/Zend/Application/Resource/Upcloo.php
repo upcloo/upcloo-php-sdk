@@ -30,6 +30,12 @@
 class UpCloo_Zend_Application_Resource_UpCloo
     extends Zend_Application_Resource_ResourceAbstract
 {
+    /**
+     * Init the UpCloo library into a Zend App
+     * 
+     * (non-PHPdoc)
+     * @see Zend_Application_Resource_Resource::init()
+     */
     public function init()
     {
         $options = $this->getOptions();

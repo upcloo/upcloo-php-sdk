@@ -30,11 +30,27 @@
 class UpCloo_Model_Base
     implements ArrayAccess, Countable
 {
+    /**
+     * The data container
+     * 
+     * @var array The container
+     */
     protected $_container = array();
     
-    
-    public function __construct() {
+    /**
+     * Create the model
+     * 
+     * This model is useful for index new contents
+     * or updates existing one.
+     * 
+     * @param int|string $id The content identification
+     */
+    public function __construct($id = false) {
         $this->_container = array();
+        
+        if ($id !== false) {
+            $this["id"] = $id;
+        }
     }
     
     public function offsetSet($offset, $value) {
@@ -78,6 +94,13 @@ class UpCloo_Model_Base
         return $this->_asXml(array("model" => $this->_container));
     }
     
+    /**
+     * Create the container starting from one
+     * 
+     * @param array $container Your actual container
+     * 
+     * @see UpCloo_Model_Base::fromArray()
+     */
     protected function _setContainer(array $container)
     {
         $this->_container = $container;
@@ -117,6 +140,11 @@ class UpCloo_Model_Base
         return $this->asXml();
     }
     
+    /**
+     * Create a model instance starting from an array
+     * 
+     * @param array $model Your array model
+     */
     public static function fromArray(array $model)
     {
         $m = new self();
