@@ -65,4 +65,14 @@ class BaseTest extends PHPUnit_Framework_TestCase
         $this->assertSame('four', $keys[0]);
         $this->assertSame('five', $keys[1]);
     }
+    
+    public function testWeirdVirtualSiteKeys()
+    {
+        $this->_instance->setVirtualSiteKeys(array(5 => 'four', "strange" => 'five'));
+        
+        $keys = array_keys($this->_instance->getVirtualSiteKeys());
+        
+        $this->assertEquals(0, $keys[0]);
+        $this->assertEquals(1, $keys[1]);
+    }
 }
