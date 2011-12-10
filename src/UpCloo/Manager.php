@@ -163,7 +163,7 @@ class UpCloo_Manager
      */
     public function setVirtualSiteKeys(array $keys)
     {
-        $this->_virtualSitekeys = $keys;
+        $this->_virtualSitekeys = array_values($keys);
         
         return $this;
     }
