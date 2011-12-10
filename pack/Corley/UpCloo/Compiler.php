@@ -88,22 +88,22 @@ class Compiler
     
     protected function getStub()
     {
-        return <<<'EOF'
-    <?php
-    /*
-     * This file is part of the UpCloo sdk.
-     *
-     * (c) Walter Dal Mut <walter.dalmut@gmail.com>
-     *
-     * This source file is subject to the MIT license that is bundled
-     * with this source code in the file LICENSE.
-     */
+        return <<<EOF
+<?php
+/*
+ * This file is part of the UpCloo sdk.
+ *
+ * (c) Walter Dal Mut <walter.dalmut@gmail.com>
+ *
+ * This source file is subject to the MIT license that is bundled
+ * with this source code in the file LICENSE.
+ */
     
-    Phar::mapPhar('upcloo-sdk.phar');
-    
-    require_once 'phar://upcloo-sdk.phar/autoload.php';
-    
-    __HALT_COMPILER();
+Phar::mapPhar('upcloo-sdk.phar');
+ 
+require_once 'phar://upcloo-sdk.phar/autoload.php';
+ 
+__HALT_COMPILER();
 EOF;
     }
 }
