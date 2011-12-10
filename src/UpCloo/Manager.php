@@ -87,8 +87,12 @@ class UpCloo_Manager
     
     /**
      * Clone is not supported 
+     * 
+     * @throws BadFunctionCallException
      */
-    public function __clone(){}
+    public function __clone(){
+        throw new BadFunctionCallException("Clone operation is not supported");
+    }
     
     /**
      * Retrive the instance
