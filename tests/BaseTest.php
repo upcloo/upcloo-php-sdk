@@ -75,4 +75,12 @@ class BaseTest extends PHPUnit_Framework_TestCase
         $this->assertEquals(0, $keys[0]);
         $this->assertEquals(1, $keys[1]);
     }
+
+    /**
+     * @expectedException BadFunctionCallException 
+     */
+    public function testClone()
+    {
+        $clone = clone $this->_instance;
+    }
 }
