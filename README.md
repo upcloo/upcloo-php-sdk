@@ -23,7 +23,7 @@ $manager->index(
 $manager->get("1243");
 ```
 
-See [wiki pages](wiki) for more information.
+See [wiki pages](upcloo-php-sdk/wiki) for more information.
 
 ## Use the PHAR package
 
