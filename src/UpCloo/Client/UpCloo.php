@@ -77,6 +77,7 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
         return $this->_index($model);
     }
     
+    
     protected function _index($model)
     {
         $this->_client->setRawData($model->asXml());

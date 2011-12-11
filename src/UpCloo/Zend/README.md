@@ -28,3 +28,16 @@ resources.upcloo.sitekey = "your-sitekey"
 resources.upcloo.virtuals.mykey = "this-vsitekey"
 resources.upcloo.virtuals.ankey = "another-vsitekey"
 ```
+
+## Bootstrap resource in test
+
+If you want a read-only UpCloo instance for your testing scope you can use the
+```UpClooMock``` client.
+
+```
+[testing : production]
+resources.upcloo.client = "UpClooMock"
+
+[development : production]
+resources.upcloo.client = "UpClooMock"
+```

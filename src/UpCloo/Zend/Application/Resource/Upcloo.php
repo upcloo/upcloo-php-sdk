@@ -55,6 +55,20 @@ class UpCloo_Zend_Application_Resource_UpCloo
             $options["password"]
         );
         
+        //Override the default client
+        if ($options["client"]) {
+            $classname = "UpCloo_Client_{$options["client"]}";
+            
+            $client = null;
+            if (class_exists($classname)) {
+                $client = new $classname;
+            } else {
+                throw new RuntimeException("Class with name {$classname} not exists. Unable to boot UpCloo.");
+            }
+            
+            $instance->setClient($client);
+        }
+        
         $vsitekeys = $options["virtuals"];
         $instance->setVirtualSiteKeys($vsitekeys);
         
