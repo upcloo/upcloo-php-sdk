@@ -23,6 +23,8 @@ $manager->index(
 $manager->get("1243");
 ```
 
+See [wiki pages](wiki) for more information.
+
 ## Use the PHAR package
 
 First of all download the latest phar archive from the download section.
