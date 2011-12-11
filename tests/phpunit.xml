@@ -21,7 +21,7 @@
             <directory></directory>
             <file>BaseTest.php</file>
             <file>ModelTest.php</file>
-            <file>UpClooClientTest.php</file>
+            <file>UpClooMockTest.php</file>
             <file>ManagerTest.php</file>
         </testsuite>
     </testsuites>
@@ -34,6 +34,7 @@
     </logging>
     <filter>
   <blacklist>
+    <directory suffix=".php">../vendor/php-file-iterator</directory>
     <directory suffix=".php">../vendor/zend</directory>
   </blacklist>
 </filter>
