@@ -72,8 +72,15 @@ class BaseTest extends PHPUnit_Framework_TestCase
         
         $keys = array_keys($this->_instance->getVirtualSiteKeys());
         
+        $this->assertEquals("2", count($keys));
+        
         $this->assertEquals(0, $keys[0]);
         $this->assertEquals(1, $keys[1]);
+        
+        $values = $this->_instance->getVirtualSiteKeys();
+        
+        $this->assertEquals("four", $values[0]);
+        $this->assertEquals("five", $values[1]);
     }
 
     /**
