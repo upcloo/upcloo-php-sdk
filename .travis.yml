@@ -7,5 +7,5 @@ before_script:
   - git submodule update
   - pyrus channel-discover zend.googlecode.com/svn
   - pyrus install zend/zend
- phpenv rehash
+  - phpenv rehash
 script: phpunit --colors --bootstrap tests/bootstrap.php tests
