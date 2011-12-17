@@ -5,6 +5,7 @@ php:
 before_script:
   - git submodule init
   - git submodule update
-  - pear channel-discover zend.googlecode.com/svn
-  - pear install zend/zend
+  - pyrus channel-discover zend.googlecode.com/svn
+  - pyrus install zend/zend
+ phpenv rehash
 script: phpunit --colors --bootstrap tests/bootstrap.php tests
