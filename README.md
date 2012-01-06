@@ -25,10 +25,10 @@ $manager->get("1243");
 
 See [wiki pages](upcloo-php-sdk/wiki) for more information.
 
-## Use the PHAR package
+## How to use the PHAR package
 
 First of all download the latest phar archive from the download section.
-After that you can use as this:
+After that you can use like this:
 
 ```php
 <?php 
