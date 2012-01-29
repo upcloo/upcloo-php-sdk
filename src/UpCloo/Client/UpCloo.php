@@ -32,7 +32,7 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
     /**
      * The http client
      * 
-     * @var Zend_Http_Client
+     * @var UpCloo_Http_Client
      */
     private $_client;
     
@@ -59,7 +59,7 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
     public function __construct($client = false)
     {
         if (!$client) {
-            $this->_client = new Zend_Http_Client();
+            $this->_client = new UpCloo_Http_Client();
         }
     }
     
@@ -108,7 +108,7 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
         
         $xml = $this->_getFromRepository($uri);
         
-        $elements = simplexml_load_string($xml);
+        $elements = @simplexml_load_string($xml);
         
         $results = array();
         if ($elements && $elements->doc) {

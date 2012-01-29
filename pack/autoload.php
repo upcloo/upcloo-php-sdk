@@ -9,8 +9,7 @@ set_include_path(
     )
 );
 
-require_once 'Zend/Loader/Autoloader.php';
-
-$loader = Zend_Loader_Autoloader::getInstance();
-$loader->registerNamespace('Zend_');
-$loader->registerNamespace('UpCloo_');
+function upcloo_autoload($className) {
+    require_once str_replace("_", "/", $className).".php";
+}
+spl_autoload_register("upcloo_autoload");

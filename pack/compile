@@ -10,9 +10,7 @@ set_include_path(implode(PATH_SEPARATOR,  array(
 
 require_once 'autoload.php';
 
-$loader = Zend_Loader_Autoloader::getInstance();
-$loader->registerNamespace("File_");
-
+require_once 'File/Iterator/Autoload.php';
 require_once dirname(__FILE__) . '/Corley/UpCloo/Compiler.php';
 
 $compiler = new \Corley\UpCloo\Compiler();

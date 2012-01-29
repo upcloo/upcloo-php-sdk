@@ -2,3 +2,4 @@ vendor/zend
 res
 .buildpath
 .project
+*.phar

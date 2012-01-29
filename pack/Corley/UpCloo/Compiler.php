@@ -5,7 +5,8 @@ class Compiler
 {
     private function _addDir($phar, $path, $stripPath, $suffix = '', $prefix = '', $exclude = array())
     {
-        $fileIterator = \File_Iterator_Factory::getFileIterator(
+        $factory = new \File_Iterator_Factory();
+        $fileIterator = $factory->getFileIterator(
             $path,
             $suffix, 
             $prefix, 
@@ -41,47 +42,13 @@ class Compiler
             'php'
         );
         
-        //Loader
-        $phar->addFile(dirname(__FILE__) . '/../../../vendor/zend/Zend/Loader.php', 'Zend/Loader.php');
-        $this->_addDir(
-            $phar,
-            realpath(dirname(__FILE__) . '/../../../vendor/zend/Zend/Loader'),
-            realpath(dirname(__FILE__) . '/../../../vendor/zend') . '/',
-            'php'
-        );
-        
-        //Http
-        $this->_addDir(
-            $phar,
-            realpath(dirname(__FILE__) . '/../../../vendor/zend/Zend/Http'),
-            realpath(dirname(__FILE__) . '/../../../vendor/zend') . '/',
-            'php'
-        );
-        
-        //Uri
-        $phar->addFile(dirname(__FILE__) . '/../../../vendor/zend/Zend/Uri.php', 'Zend/Uri.php');
-        $this->_addDir(
-            $phar,
-            realpath(dirname(__FILE__) . '/../../../vendor/zend/Zend/Uri'),
-            realpath(dirname(__FILE__) . '/../../../vendor/zend') . '/',
-            'php'
-        );
-        
-        //Validator
-        $this->_addDir(
-            $phar,
-            realpath(dirname(__FILE__) . '/../../../vendor/zend/Zend/Validate'),
-            realpath(dirname(__FILE__) . '/../../../vendor/zend') . '/',
-            'php'
-        );
-        
         $phar->addFile(realpath(dirname(__FILE__) . "/../../LICENSE"), "LICENSE");
         
         $phar->setStub($this->getStub());
         
         $phar->stopBuffering();
         
-//         $phar->compressFiles(\Phar::GZ);
+        $phar->compressFiles(\Phar::GZ);
         
         unset($phar);
     }
