@@ -82,7 +82,7 @@ MAO
         
         $this->assertTrue($this->_instance->index($model));
         
-        $this->assertEquals("http://username.update.upcloo.com:80", $this->_instance->getClient()->getUri());
+        $this->assertEquals("http://username.update.upcloo.com", $this->_instance->getClient()->getUri());
         
         $model = array();
         $model["id"] = 15;
@@ -121,7 +121,7 @@ MAO
         $this->assertInternalType("array", $results);
         $this->assertEquals(2, count($results));
         $uri = $this->_instance->getClient()->getUri();
-        $this->assertEquals("http://repository.upcloo.com:80/sitekey/15.xml", $uri);
+        $this->assertEquals("http://repository.upcloo.com/sitekey/15.xml", $uri);
         
         $this->assertInstanceOf("UpCloo_Model_Base", $results[0]);
         $this->assertEquals("Walter", $results[0]["title"]);
@@ -135,7 +135,7 @@ MAO
         
         $results = $this->_instance->get("15", "vsite");
         $uri = $this->_instance->getClient()->getUri();
-        $this->assertEquals("http://repository.upcloo.com:80/sitekey/vsite/15.xml", $uri);
+        $this->assertEquals("http://repository.upcloo.com/sitekey/vsite/15.xml", $uri);
         
         $this->assertInternalType("array", $results);
         $this->assertEquals(2, count($results));
