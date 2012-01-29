@@ -51,13 +51,5 @@ For more information on ```phpunit``` consider
 
 ```
 $ phpunit
-PHPUnit 3.5.15 by Sebastian Bergmann.
-
-.......
-
-Time: 1 second, Memory: 4.50Mb
-
-OK (7 tests, 20 assertions)
-
-Generating code coverage report, this may take a moment.
 ```
+
