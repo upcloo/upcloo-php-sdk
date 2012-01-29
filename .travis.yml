@@ -5,5 +5,4 @@ php:
 before_script:
   - git submodule init
   - git submodule update
-  - sh get-zend.sh
 script: phpunit --colors --bootstrap tests/bootstrap.php tests
