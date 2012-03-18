@@ -42,47 +42,6 @@ class BaseTest extends PHPUnit_Framework_TestCase
         $this->assertSame("helloS", $this->_instance->getSiteKey());
     }
     
-    public function testVirtualSiteKey()
-    {
-        $this->_instance->setCredential("username", "sitekey", "password", "one", "two", "three");
-        
-        $this->assertInternalType("array", $this->_instance->getVirtualSiteKeys());
-        
-        $this->assertEquals("3", count($this->_instance->getVirtualSiteKeys()));
-        
-        $keys = $this->_instance->getVirtualSiteKeys();
-        
-        $this->assertSame('one', $keys[0]);
-        $this->assertSame('two', $keys[1]);
-        $this->assertSame('three', $keys[2]);
-        
-        $this->_instance->setVirtualSiteKeys(array('four', 'five'));
-        
-        $this->assertEquals("2", count($this->_instance->getVirtualSiteKeys()));
-        
-        $keys = $this->_instance->getVirtualSiteKeys();
-        
-        $this->assertSame('four', $keys[0]);
-        $this->assertSame('five', $keys[1]);
-    }
-    
-    public function testWeirdVirtualSiteKeys()
-    {
-        $this->_instance->setVirtualSiteKeys(array(5 => 'four', "strange" => 'five'));
-        
-        $keys = array_keys($this->_instance->getVirtualSiteKeys());
-        
-        $this->assertEquals("2", count($keys));
-        
-        $this->assertEquals(0, $keys[0]);
-        $this->assertEquals(1, $keys[1]);
-        
-        $values = $this->_instance->getVirtualSiteKeys();
-        
-        $this->assertEquals("four", $values[0]);
-        $this->assertEquals("five", $values[1]);
-    }
-
     /**
      * @expectedException BadFunctionCallException 
      */

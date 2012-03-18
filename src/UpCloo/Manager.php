@@ -142,44 +142,11 @@ class UpCloo_Manager
      */
     public function setCredential($username, $sitekey, $password)
     {
-        $args = func_get_args();
-
         $this->setUsername($username);
         $this->setSiteKey($sitekey);
         $this->setPassword($password);
         
-        array_shift($args);
-        array_shift($args);
-        array_shift($args); //remove first three elements
-        
-        if (count($args)) {
-            $this->setVirtualSiteKeys($args);
-        }
-        
         return $this;
-    }
-    
-    /**
-     * Set virtual site keys
-     * 
-     * @param array $keys
-     * @return UpCloo_Manager
-     */
-    public function setVirtualSiteKeys(array $keys)
-    {
-        $this->_virtualSitekeys = array_values($keys);
-        
-        return $this;
-    }
-    
-    /**
-     * Get the sitekeys list 
-     * 
-     * @return array The list of virtual site keys
-     */
-    public function getVirtualSiteKeys()
-    {
-        return $this->_virtualSitekeys;
     }
     
     /**
