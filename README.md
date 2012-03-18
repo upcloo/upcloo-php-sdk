@@ -33,7 +33,7 @@ and all your other dependencies. After that you can
 require for ```UpCloo/Autoloader.php```. That's it. See this
 running example:
 
-```
+```php
 <?php
 set_include_path(
     implode(
