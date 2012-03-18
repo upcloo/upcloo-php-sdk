@@ -50,8 +50,10 @@ class ModelTest extends PHPUnit_Framework_TestCase
         
         $model["title"] = "walter";
         
-        $expected = "<model><title><![CDATA[walter]]></title></model>";
-        $this->assertEquals($expected, $model->asXml());
+        $xmlExpected = simplexml_load_string("<model><title><![CDATA[walter]]></title></model>");
+        $xmlActual = simplexml_load_string($model->asXml());
+        
+        $this->assertEquals((string)$xmlExpected->title, (string)$xmlActual->title);
     }
     
     public function testStructXml()
@@ -61,9 +63,25 @@ class ModelTest extends PHPUnit_Framework_TestCase
         $model["title"] = 'walter';
         $model["tags"] = array("one", "two", "three");
         
-        $expected = '<model><title><![CDATA[walter]]></title><tags><element><![CDATA[one]]></element><element><![CDATA[two]]></element><element><![CDATA[three]]></element></tags></model>';
+        $xmlExpected =simplexml_load_string('<model><title><![CDATA[walter]]></title><tags><element><![CDATA[one]]></element><element><![CDATA[two]]></element><element><![CDATA[three]]></element></tags></model>');
+        $xmlActual = simplexml_load_string($model->asXml());
+
+        $this->assertEquals((string)$xmlExpected->title, (string)$xmlActual->title);
+        $this->assertEquals((string)$xmlExpected->tags->element[0], (string)$xmlActual->tags->element[0]);
+        $this->assertEquals((string)$xmlExpected->tags->element[1], (string)$xmlActual->tags->element[1]);
+        $this->assertEquals((string)$xmlExpected->tags->element[3], (string)$xmlActual->tags->element[3]);
+    }
+    
+    public function testXmlValidate()
+    {
+        $model = new UpCloo_Model_Base();
         
-        $this->assertEquals($expected, $model->asXml());
+        $model["title"] = "è <> & !/\\";
+        
+        $expected = "<model><title><![CDATA[è <> & !/\\]]></title></model>";
+        $xmlExpected = simplexml_load_string($expected);
+        $xmlActual = simplexml_load_string((string)$model);
+        $this->assertEquals((string)$xmlExpected->title, (string)$xmlActual->title);
     }
     
     public function testCastString()
@@ -73,7 +91,9 @@ class ModelTest extends PHPUnit_Framework_TestCase
         $model["title"] = "walter";
         
         $expected = "<model><title><![CDATA[walter]]></title></model>";
-        $this->assertEquals($expected, (string)$model);
+        $xmlExpected = simplexml_load_string($expected);
+        $xmlActual = simplexml_load_string((string)$model);
+        $this->assertEquals((string)$xmlExpected->title, (string)$xmlActual->title);
     }
     
     public function testFromArray()

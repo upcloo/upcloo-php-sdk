@@ -86,12 +86,13 @@ class UpCloo_Model_Base
      * Retrive the XML representation of this object
      * 
      * @return string The XML representation of this object
-     * 
-     * @todo fix this using dom elements.
      */
     public function asXml()
     {
-        return $this->_asXml(array("model" => $this->_container));
+        $document = new DOMDocument("1.0", "utf-8");
+        $this->_asXml(array("model" => $this->_container), null, $document);
+        
+        return $document->saveXML();
     }
     
     /**
@@ -109,24 +110,32 @@ class UpCloo_Model_Base
     /**
      * Convert this model to XML representation
      * 
-     * @param array $model
+     * @param array|string $model
+     * @param DOMNode $root
+     * @param DOMDocument $document
      */
-    private function _asXml($model)
+    private function _asXml($model, $root, $document)
     {
         if (is_string($model)) {
-            return "<![CDATA[" . strip_tags($model) . "]]>";
+            $element = $document->createTextNode($model);
+            $root->appendChild($element);
         } else {
-            $xml = "";
             if ($model && is_array($model)) {
                 foreach ($model as $key => $value) {
                     if (is_int($key)) {
-                        $key = "element";
+                        $key = 'element';
                     }
-                    $xml .= "<{$key}>" . $this->_asXml($value) . "</{$key}>";
+                     
+                    $element = $document->createElement($key);
+                    $this->_asXml($value, $element, $document);
+                    
+                    if ($root === null) {
+                        $document->appendChild($element);
+                    } else {
+                        $root->appendChild($element);
+                    }
                 }
             }
-        
-            return $xml;
         }
     }
     
