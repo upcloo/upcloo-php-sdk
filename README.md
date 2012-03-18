@@ -25,6 +25,33 @@ $manager->get("1243");
 
 See [wiki pages](upcloo-php-sdk/wiki) for more information.
 
+## Library autoloader
+
+This library provides a simple autoloader. Simple you have
+to set your ```include_path``` with the library position
+and all your other dependencies. After that you can 
+require for ```UpCloo/Autoloader.php```. That's it. See this
+running example:
+
+```
+<?php
+set_include_path(
+    implode(
+        PATH_SEPARATOR,  
+        array(
+            //UpCloo library position on disk
+            realpath(dirname(__FILE__) . '/../src'),
+            //include other libraries previously setted
+            get_include_path()
+        )
+    )
+);
+
+require_once 'UpCloo/Autoloader.php';
+
+//now the library is ready for using.
+```
+
 ## How to use the PHAR package
 
 First of all download the latest phar archive from the download section.
