@@ -49,7 +49,7 @@ set_include_path(
 
 require_once 'UpCloo/Autoloader.php';
 
-//now the library is ready for using.
+//now the library is ready.
 ```
 
 ## How to use the PHAR package
