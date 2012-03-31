@@ -91,6 +91,8 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
      * Execute a search query
      *
      * @param UpCloo_Model_Search $searchQuery
+     * 
+     * @return SimpleXMLElement The raw xml parsed
      */
     public function search(UpCloo_Model_Search $searchQuery)
     {
@@ -98,7 +100,9 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
     
         $this->_client->setRawData($searchQuery->asXml());
     
-        $xml = $this->_client->request(UpCloo_Http_Client::POST);
+        $xml = @simplexml_load_string($this->_client->request(UpCloo_Http_Client::POST));
+        
+        //Modelize response
     
         return $xml;
     }
