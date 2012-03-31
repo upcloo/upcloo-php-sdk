@@ -88,4 +88,18 @@ class SearchModelTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("Web", (string)$filters[0]);
         $this->assertEquals("Commedy", (string)$filters[1]);
     }
+    
+    public function testNetworkQueries()
+    {
+        $manager = UpCloo_Manager::getInstance();
+        $search = $manager->search()->network("sitekey")->network("another-one")->query("OK");
+        $xml = simplexml_load_string((string)$search);
+        
+        $networks = $xml->search->network->sitekey;
+        
+        $this->assertEquals(2, count($networks));
+        $this->assertEquals("sitekey", $networks[0]);
+        $this->assertEquals("another-one", $networks[1]);
+        $this->assertEquals("OK", (string)$xml->search->q);
+    }
 }

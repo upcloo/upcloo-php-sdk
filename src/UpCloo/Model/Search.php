@@ -259,12 +259,12 @@ class UpCloo_Model_Search
         
         //Network section
         if (count($this->_networks) > 0) {
-            $network = $document->createElement("network");
+            $networkNode = $document->createElement("network");
             foreach ($this->_networks as $network) {
-                $sitekey = $document->createAttribute("sitekey", $network);
-                $network->appendChild($sitekey);
+                $sitekey = $document->createElement("sitekey", $network);
+                $networkNode->appendChild($sitekey);
             }
-            $searchNode->appendChild($network);
+            $searchNode->appendChild($networkNode);
         }
         
         $model->appendChild($searchNode);
