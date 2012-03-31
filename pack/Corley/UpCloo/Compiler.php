@@ -33,8 +33,6 @@ class Compiler
         
         $phar->startBuffering();
         
-        $phar->addFile("autoload.php");
-        
         $this->_addDir(
         $phar,
             realpath(dirname(__FILE__) . '/../../../src/UpCloo'),
@@ -68,7 +66,7 @@ class Compiler
     
 Phar::mapPhar('upcloo-sdk.phar');
  
-require_once 'phar://upcloo-sdk.phar/autoload.php';
+require_once 'phar://upcloo-sdk.phar/UpCloo/Autoloader.php';
  
 __HALT_COMPILER();
 EOF;

@@ -8,8 +8,6 @@ set_include_path(implode(PATH_SEPARATOR,  array(
     get_include_path(),
 )));
 
-require_once 'autoload.php';
-
 require_once 'File/Iterator/Autoload.php';
 require_once dirname(__FILE__) . '/Corley/UpCloo/Compiler.php';
 
