@@ -30,6 +30,7 @@ See [wiki pages](upcloo-php-sdk/wiki) for more information.
 Now search query are handled by this library 
 
 ```php
+<?php
 $searchQuery = $manager->search()->query("Text to search");
 
 $results = $manager->get($searchQuery);
@@ -41,6 +42,7 @@ Search queries works chaining objects. You can start a new query
 using ```search()``` method.
 
 ```php
+<?php
 $searchQuery = $manager->search()
     ->query("Text to search")
     ->facet("category");
@@ -58,6 +60,7 @@ $results = $manager->get($searchQuery);
 Here the range method prototype
 
 ```php
+<?php
 public function range($type=self::RANGE_DATE, 
             $field="publish_date", 
             $gap="1", 
@@ -70,6 +73,7 @@ public function range($type=self::RANGE_DATE,
 Using into a call
 
 ```php
+<?php
 //Backward range query
 $searchQuery = $manager->search()
     ->query("Text to search")
