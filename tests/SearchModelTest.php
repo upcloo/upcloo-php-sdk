@@ -60,6 +60,7 @@ class SearchModelTest extends PHPUnit_Framework_TestCase
         $xml = simplexml_load_string((string)$search);
         $facets = $xml->search->facet;
         
+        $this->assertEquals("To a spectacular man..." ,(string)$xml->search->q);
         $this->assertEquals("2", count($facets));
         $this->assertEquals("category", $facets[0]);
         $this->assertEquals("tags", $facets[1]);
