@@ -181,6 +181,8 @@ class UpCloo_Model_Search
         $range->to = $to;
         $range->value = $value;
         
+        $this->_ranges[] = $range;
+        
         return $this;
     }
     

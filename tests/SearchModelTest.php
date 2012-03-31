@@ -102,4 +102,30 @@ class SearchModelTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("another-one", $networks[1]);
         $this->assertEquals("OK", (string)$xml->search->q);
     }
+    
+    public function testRangeQueries()
+    {
+        $manager = UpCloo_Manager::getInstance();
+        $search = $manager->search()
+            ->query("a query")
+            ->range("d", "p", "4", "-", "-92", "99", "AZ")
+        ;
+        
+        $xml = simplexml_load_string((string)$search);
+        $ranges = $xml->search->range;
+        $attr = $ranges->attributes();
+        
+        $this->assertEquals("AZ", (string)$ranges);
+        $this->assertEquals("d", (string)$attr["type"]);
+        $this->assertEquals("p", (string)$attr["field"]);
+        $this->assertEquals("4", (string)$attr["gap"]);
+        $this->assertEquals("-", (string)$attr["direction"]);
+        $this->assertEquals("-92", (string)$attr["from"]);
+        $this->assertEquals("99", (string)$attr["to"]);
+    }
+    
+    public function testSchemaValidation()
+    {
+        $this->markTestSkipped("Schema XSD is not visible online");
+    }
 }
