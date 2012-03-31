@@ -43,6 +43,13 @@ class UpCloo_Manager
     const REPOSITORY = 'http://repository.upcloo.com/%s';
     
     /**
+     * Search Endpoint
+     * 
+     * @var string
+     */
+    const SEARCH_ENDPOINT = "http://search.upcloo.com/search/rest";
+    
+    /**
      * The single instance
      * 
      * @var UpCloo_Manager
@@ -74,11 +81,6 @@ class UpCloo_Manager
      * @var UpCloo_Client_UpCloo
      */
     protected $_client;
-    
-    /**
-     * @var UpCloo_Client_Search
-     */
-    protected $_searchClient;
     
     /**
      * A list of virtual sitekeys
@@ -115,11 +117,6 @@ class UpCloo_Manager
             //Default set the client
             self::$_instance->setClient(
                 new UpCloo_Client_UpCloo()
-            );
-            
-            //Default set the search client
-            self::$_instance->setSearchClient(
-                new UpCloo_Client_Search()
             );
         }
         
@@ -274,11 +271,11 @@ class UpCloo_Manager
      */
     public function get($id, $virtualSiteKey = false)
     {
-        if ($id instanceof UpCloo_Model_Search) {
-            //Search query
-        } else {
-            $this->_client->setSiteKey($this->getSiteKey());
+        $this->_client->setSiteKey($this->getSiteKey());
         
+        if ($id instanceof UpCloo_Model_Search) {
+            return $this->_client->search($id);
+        } else {
             return $this->_client->get($id, $virtualSiteKey);
         }
     }

@@ -34,7 +34,7 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
      * 
      * @var UpCloo_Http_Client
      */
-    private $_client;
+    protected $_client;
     
     /**
      * The username
@@ -85,6 +85,22 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
         $response = $this->_client->request("put");
         
         return ($response->getStatus() == 200);
+    }
+    
+    /**
+     * Execute a search query
+     *
+     * @param UpCloo_Model_Search $searchQuery
+     */
+    public function search(UpCloo_Model_Search $searchQuery)
+    {
+        $this->_client->setUri(UpCloo_Manager::SEARCH_ENDPOINT);
+    
+        $this->_client->setRawData($searchQuery->asXml());
+    
+        $xml = $this->_client->request(UpCloo_Http_Client::POST);
+    
+        return $xml;
     }
     
     /**
