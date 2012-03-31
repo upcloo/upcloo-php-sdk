@@ -115,6 +115,12 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
             foreach ($elements->doc as $element) {
                 $model = new UpCloo_Model_Base();
                 $model["title"] = (string)$element->title;
+                $model["url"] = (string)$element->url;
+                $model["description"] = (string)$element->description;
+                $model["type"] = (string)$element->type;
+                $model["image"] = (string)$element->image;
+                
+                //TODO: working on categories and tags
                 
                 $results[] = $model;
             }
