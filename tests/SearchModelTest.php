@@ -65,4 +65,27 @@ class SearchModelTest extends PHPUnit_Framework_TestCase
         $this->assertEquals("category", $facets[0]);
         $this->assertEquals("tags", $facets[1]);
     }
+    
+    public function testFilterByQueries()
+    {
+        $manager = UpCloo_Manager::getInstance();
+        $search = $manager->search()
+            ->query("To a spectacular man...")
+            ->filterBy("category", "Web")
+            ->filterBy("tags", "Commedy")
+        ;
+        
+        $xml = simplexml_load_string((string)$search);
+        $filters = $xml->search->filter;
+        
+        $this->assertEquals("To a spectacular man..." ,(string)$xml->search->q);
+        $this->assertEquals("2", count($filters));
+        $fattr = $filters[0]->attributes();
+        $this->assertEquals("category", $fattr["by"]);
+        $fattr = $filters[1]->attributes();
+        $this->assertEquals("tags", $fattr["by"]);
+        
+        $this->assertEquals("Web", (string)$filters[0]);
+        $this->assertEquals("Commedy", (string)$filters[1]);
+    }
 }

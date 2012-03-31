@@ -236,24 +236,24 @@ class UpCloo_Model_Search
         
         if (count($this->_ranges) > 0) {
             foreach ($this->_ranges as $range) {
-                $range = $document->createElement("range", $range->value);
-                $range->createAttribute("type", $range->type);
-                $range->createAttribute("field", $range->field);
-                $range->createAttribute("gap", $range->gap);
-                $range->createAttribute("direction", $range->direction);
-                $range->createAttribute("from", $range->from);
-                $range->createAttribute("to", $range->to);
+                $rangeNode = $document->createElement("range", $range->value);
+                $rangeNode->setAttribute("type", $range->type);
+                $rangeNode->setAttribute("field", $range->field);
+                $rangeNode->setAttribute("gap", $range->gap);
+                $rangeNode->setAttribute("direction", $range->direction);
+                $rangeNode->setAttribute("from", $range->from);
+                $rangeNode->setAttribute("to", $range->to);
                 
-                $searchNode->appendChild($range);
+                $searchNode->appendChild($rangeNode);
             }
         }
         
         //Filters section
         if (count($this->_filters) > 0) {
             foreach ($this->_filters as $filter) {
-                $filter = $document->createElement("filter", $filter->value);
-                $filter->createAttribute("by", $filter->by);
-                $searchNode->appendChild($filter);
+                $filterNode = $document->createElement("filter", $filter->value);
+                $filterNode->setAttribute("by", $filter->by);
+                $searchNode->appendChild($filterNode);
             }
         }
         
