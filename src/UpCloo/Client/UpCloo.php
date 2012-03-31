@@ -82,7 +82,7 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
     {
         $this->_client->setRawData($model->asXml());
         
-        $response = $this->_client->request("put");
+        $response = $this->_client->request(UpCloo_Http_Client::PUT);
         
         return ($response->getStatus() == 200);
     }
