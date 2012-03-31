@@ -25,6 +25,61 @@ $manager->get("1243");
 
 See [wiki pages](upcloo-php-sdk/wiki) for more information.
 
+## Search Queries
+
+Now search query are handled by this library 
+
+```php
+$searchQuery = $manager->search()->query("Text to search");
+
+$results = $manager->get($searchQuery);
+```
+
+### Complex queries
+
+Search queries works chaining objects. You can start a new query
+using ```search()``` method.
+
+```php
+$searchQuery = $manager->search()
+    ->query("Text to search")
+    ->facet("category");
+    ->range() //maybe much more complex
+    ->filterBy("category", "Web")
+    ->network("a-partner-sitekey")
+    ->network("a-partner-sitekey")
+;
+
+$results = $manager->get($searchQuery);
+```
+
+### Ranges 
+
+Here the range method prototype
+
+```php
+public function range($type=self::RANGE_DATE, 
+            $field="publish_date", 
+            $gap="1", 
+            $direction=self::DIRECTION_FORWARD, 
+            $from="1900-01-01T00:00:00Z", 
+            $to=self::NOW, 
+            $value=self::RANGE_DATE_YEAR);
+```
+
+Using into a call
+
+```php
+//Backward range query
+$searchQuery = $manager->search()
+    ->query("Text to search")
+    ->range("date", "publish_date", 2, "-", "NOW", "2000-01-01T00:00:00Z")
+    ->filterBy("category", "meteo")
+;
+
+$results = $manager->get($searchQuery);
+```
+
 ## Library autoloader
 
 This library provides a simple autoloader. Simple you have

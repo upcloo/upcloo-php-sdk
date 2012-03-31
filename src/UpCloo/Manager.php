@@ -70,7 +70,15 @@ class UpCloo_Manager
      */
     private $_password;
     
+    /**
+     * @var UpCloo_Client_UpCloo
+     */
     protected $_client;
+    
+    /**
+     * @var UpCloo_Client_Search
+     */
+    protected $_searchClient;
     
     /**
      * A list of virtual sitekeys
@@ -108,9 +116,19 @@ class UpCloo_Manager
             self::$_instance->setClient(
                 new UpCloo_Client_UpCloo()
             );
+            
+            //Default set the search client
+            self::$_instance->setSearchClient(
+                new UpCloo_Client_Search()
+            );
         }
         
         return self::$_instance;
+    }
+    
+    public function setSearchClient($client)
+    {
+        $this->_searchClient = $client;
     }
     
     /**
@@ -241,19 +259,27 @@ class UpCloo_Manager
         return $this->getClient()->index($model);
     }
     
-
+    public function search()
+    {
+        return new UpCloo_Model_Search();
+    }
+    
     /**
      * 
      * 
-     * @param string $id
+     * @param string|UpCloo_Model_Search $id
      * @param string $virtualSiteKey
      * 
      * @return array The list of results 
      */
     public function get($id, $virtualSiteKey = false)
     {
-        $this->_client->setSiteKey($this->getSiteKey());
+        if ($id instanceof UpCloo_Model_Search) {
+            //Search query
+        } else {
+            $this->_client->setSiteKey($this->getSiteKey());
         
-        return $this->_client->get($id, $virtualSiteKey);
+            return $this->_client->get($id, $virtualSiteKey);
+        }
     }
 }

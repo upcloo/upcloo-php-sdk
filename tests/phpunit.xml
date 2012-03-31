@@ -18,11 +18,7 @@
         verbose="false">
     <testsuites>
         <testsuite name="UpCloo SDK Suite">
-            <directory></directory>
-            <file>BaseTest.php</file>
-            <file>ModelTest.php</file>
-            <file>UpClooMockTest.php</file>
-            <file>ManagerTest.php</file>
+            <directory>.</directory>
         </testsuite>
     </testsuites>
     <logging>
