@@ -35,6 +35,16 @@ class SearchModelTest extends PHPUnit_Framework_TestCase
         $manager->setCredential("username", "my-sitekey", "password");
     }
     
+    public function testDifferentSearches()
+    {
+        $manager = UpCloo_Manager::getInstance();
+        $search1 = $manager->search();
+        
+        $search2 = $manager->search();
+        
+        $this->assertNotSame($search1, $search2);
+    }
+    
     public function testBaseQuery()
     {
         $manager = UpCloo_Manager::getInstance();
@@ -127,5 +137,39 @@ class SearchModelTest extends PHPUnit_Framework_TestCase
     public function testSchemaValidation()
     {
         $this->markTestSkipped("Schema XSD is not visible online");
+    }
+    
+    public function testRelevancyParameter()
+    {
+        $manager = UpCloo_Manager::getInstance();
+        
+        //Force date relevancy        
+        $search = $manager->search()
+            ->relevancy(UpCloo_Model_Search::RELEVANCY_DATE)
+            ->query("hello world");
+        
+        $xml = simplexml_load_string((string)$search);
+        
+        $attr = $xml->search->attributes();
+        $this->assertEquals("hello world", (string)$xml->search->q);
+        $this->assertEquals("date", (string)$attr["relevancy"]);
+        
+        //Force default relevancy
+        $search = $manager->search()
+            ->relevancy(UpCloo_Model_Search::RELEVANCY_DEFAULT)
+            ->query("hello world");
+        
+        $xml = simplexml_load_string((string)$search);
+        
+        $attr = $xml->search->attributes();
+        $this->assertEquals("default", (string)$attr["relevancy"]);
+        
+        //Default is default relevancy
+        $search = $manager->search()->query("hello world");
+
+        $xml = simplexml_load_string((string)$search);
+        
+        $attr = $xml->search->attributes();
+        $this->assertEquals("default", (string)$attr["relevancy"]);
     }
 }

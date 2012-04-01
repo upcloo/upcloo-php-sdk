@@ -38,6 +38,12 @@ class UpCloo_Model_Search
     
     private $_page;
     private $_numPerPage;
+    /**
+     * Relevancy request
+     * 
+     * @var string A relevancy for this query maybe DATE/DEFAULT
+     */
+    private $_relevancy;
     
     const RANGE_DATE = "date";
     const DIRECTION_FORWARD = "forward";
@@ -46,6 +52,9 @@ class UpCloo_Model_Search
     const RANGE_DATE_YEAR = "YEAR";
     const RANGE_DATE_MONTH = "MONTH";
     const RANGE_DATE_DAY = "DAY";
+    
+    const RELEVANCY_DATE = 'date';
+    const RELEVANCY_DEFAULT = 'default';
     
     const NOW = "NOW";
     
@@ -62,6 +71,7 @@ class UpCloo_Model_Search
         
         $this->_numPerPage = 25;
         $this->_page = 1;
+        $this->_relevancy = self::RELEVANCY_DEFAULT;
         
     }
     
@@ -74,6 +84,13 @@ class UpCloo_Model_Search
     public function query($query)
     {
         $this->_query = trim($query);
+        
+        return $this;
+    }
+    
+    public function relevancy($relevancy = self::RELEVANCY_DATE)
+    {
+        $this->_relevancy = $relevancy;
         
         return $this;
     }
@@ -223,6 +240,10 @@ class UpCloo_Model_Search
         
         if ($this->_numPerPage) {
             $searchNode->setAttribute("numPerPage", $this->_numPerPage);
+        }
+        
+        if ($this->_relevancy) {
+            $searchNode->setAttribute("relevancy", $this->_relevancy);
         }
 
         $q = $document->createElement("q", $this->_query);
