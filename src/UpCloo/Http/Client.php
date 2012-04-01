@@ -1,9 +1,9 @@
 <?php 
 class UpCloo_Http_Client
 {
-    const PUT = 'put';
-    const GET = 'get';
-    const POST = 'post';
+    const PUT = 'PUT';
+    const GET = 'GET';
+    const POST = 'POST';
     
     const UPCLOO_USER_AGENT = 'UpCloo-SDK-1.0';
     
