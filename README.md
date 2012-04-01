@@ -91,6 +91,7 @@ require for ```UpCloo/Autoloader.php```. That's it. See this
 running example:
 
 ```php
+<?php
 require_once 'path/to/UpCloo/Autoloader.php';
 
 //now the library is ready.
