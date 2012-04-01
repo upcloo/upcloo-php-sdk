@@ -16,4 +16,8 @@
             <url>http://domain.ltd/1.html</url>
         </doc>
     </docs>
+    <facets>
+        <ranges />
+    </facets>
+    <suggestions />
 </response>

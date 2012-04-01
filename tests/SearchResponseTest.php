@@ -31,5 +31,29 @@ class SearchResponseTest
         
         $this->assertEquals("post_1", $docs[0]["id"]);
         $this->assertEquals("post_2", $docs[1]["id"]);
+        
+        $this->assertEquals(0, count($model->getSuggestions()));
+    }
+    
+    public function testSuggests()
+    {
+        $xml = simplexml_load_file(__DIR__ . '/data/suggests.xml');
+        $model = UpCloo_Model_Search_Response::fromResponse($xml);
+        
+        $this->assertEquals(2, count($model->getSuggestions()));
+        $mu = $model->getSuggestions();
+
+        $keys = array_keys($mu);
+        $this->assertEquals("intrel", $keys[0]);
+        $this->assertEquals("ble", $keys[1]);
+
+        $first = $mu["intrel"];
+        $this->assertEquals("2", count($first));
+        $this->assertEquals("intranet", $first[0]);
+        $this->assertEquals("intel", $first[1]);
+
+        $first = $mu["ble"];
+        $this->assertEquals("1", count($first));
+        $this->assertEquals("blue", $first[0]);
     }
 }

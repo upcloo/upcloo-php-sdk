@@ -43,8 +43,22 @@ class UpCloo_Model_Search_Response
                 
                 $model->_docs[] = $m;
             }
+            
+            foreach ($root->suggestions->suggest as $suggest) {
+                $attr = $suggest->attributes();
+                $name = (string)$attr["name"];
+                
+                foreach ($suggest->proposal as $proposal) {
+                    $model->_suggests[$name][] = (string)$proposal;
+                }
+            }
         }
         return $model;
+    }
+    
+    public function getSuggestions()
+    {
+        return $this->_suggests;
     }
     
     /**
