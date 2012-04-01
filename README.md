@@ -44,16 +44,65 @@ using ```search()``` method.
 ```php
 <?php
 $searchQuery = $manager->search()
+    ->relevancy() //Force date relevancy
     ->query("Text to search")
     ->facet("category");
     ->range() //maybe much more complex
     ->filterBy("category", "Web")
     ->network("a-partner-sitekey")
-    ->network("a-partner-sitekey")
 ;
 
 $results = $manager->get($searchQuery);
 ```
+
+### Query
+
+The query is what you want to search, it could be a sentence or
+simple a word but not empty.
+
+### Relevancy
+
+Relevancy is the boost operator that indicates that this query
+must works with a relevancy on a particular rule. Possible 
+values actually are only: date and default.
+
+ * Date indicates that are better new contents (using ```publish_date```
+field)
+ * Default for a natural query execution.
+ 
+### Filter By
+
+This method indicates that you want to reduce your result set. You
+can chain this operator.
+
+```php
+<?php
+$search->filterBy("a", "b")->filterBy("c", "d");
+```
+
+### Facet
+
+Facet operator is the "group by" and "count". You can chain this
+operator.
+
+```php
+<?php
+$search->facet("category")->facet("author");
+```
+
+### Network
+
+If you have a network of sites that you query not only your
+repository but involves other partner indexes for having more
+results. You can chain this operator
+
+```php
+<?php
+$search->network("first")->network("second");
+``` 
+
+Is not useful including your sitekey because the sistem involve
+it by itself.
 
 ### Ranges 
 
@@ -83,6 +132,8 @@ $searchQuery = $manager->search()
 
 $results = $manager->get($searchQuery);
 ```
+
+You can chain this operator.
 
 ## Library autoloader
 
