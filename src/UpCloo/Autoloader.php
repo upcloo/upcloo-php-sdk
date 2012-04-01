@@ -1,15 +1,15 @@
 <?php 
-set_include_path(
-    implode(
-        PATH_SEPARATOR,
-        array(
-            realpath(dirname(__FILE__) . "/../"),
-            get_include_path()
-        )
-    )
-);
+$dirname = dirname(__FILE__);
 
-function upcloo_autoload($className) {
-    require_once str_replace("_", "/", $className).".php";
-}
-spl_autoload_register("upcloo_autoload");
+require_once $dirname . "/Manager.php";
+require_once $dirname . "/Client/ClientInterface.php";
+require_once $dirname . "/Client/UpCloo.php";
+require_once $dirname . "/Client/UpClooMock.php";
+require_once $dirname . "/Http/Client.php";
+require_once $dirname . "/Http/Exception.php";
+require_once $dirname . "/Http/Response.php";
+require_once $dirname . "/Model/Base.php";
+require_once $dirname . "/Model/Exception.php";
+require_once $dirname . "/Model/Search.php";
+require_once $dirname . "/Zend/Application/Resource/Exception.php";
+require_once $dirname . "/Zend/Application/Resource/UpCloo.php";
