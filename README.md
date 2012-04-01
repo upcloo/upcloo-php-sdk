@@ -86,30 +86,18 @@ $results = $manager->get($searchQuery);
 
 ## Library autoloader
 
-This library provides a simple autoloader. Simple you have
-to set your ```include_path``` with the library position
-and all your other dependencies. After that you can 
+This library provides a simple autoloader. You can 
 require for ```UpCloo/Autoloader.php```. That's it. See this
 running example:
 
 ```php
-<?php
-set_include_path(
-    implode(
-        PATH_SEPARATOR,  
-        array(
-            //UpCloo library position on disk
-            realpath(dirname(__FILE__) . '/../src'),
-            //include other libraries previously setted
-            get_include_path()
-        )
-    )
-);
-
-require_once 'UpCloo/Autoloader.php';
+require_once 'path/to/UpCloo/Autoloader.php';
 
 //now the library is ready.
 ```
+
+The UpCloo PHP Autoloader use a classmap method for links all
+dependencies.
 
 ## How to use the PHAR package
 
