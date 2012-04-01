@@ -92,7 +92,7 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
      *
      * @param UpCloo_Model_Search $searchQuery
      * 
-     * @return SimpleXMLElement The raw xml parsed
+     * @return UpCloo_Model_Search_Response The raw xml parsed
      */
     public function search(UpCloo_Model_Search $searchQuery)
     {
@@ -103,8 +103,9 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
         $xml = @simplexml_load_string($this->_client->request(UpCloo_Http_Client::POST));
         
         //Modelize response
+        $model = UpCloo_Model_Search_Response::fromResponse($xml);
     
-        return $xml;
+        return $model;
     }
     
     /**

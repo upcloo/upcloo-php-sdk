@@ -256,18 +256,29 @@ class UpCloo_Manager
         return $this->getClient()->index($model);
     }
     
+    /**
+     * Start a new search query
+     * 
+     * @return UpCloo_Model_Search Search query
+     */
     public function search()
     {
         return new UpCloo_Model_Search();
     }
     
     /**
+     * Get a content relation or execute a search 
+     * query
      * 
+     * In case of search you have to pass a valid 
+     * <code>UpCloo_Model_Search</code> and the
+     * <code>UpCloo_Model_Search_Response</code> will
+     * be returned.
      * 
      * @param string|UpCloo_Model_Search $id
      * @param string $virtualSiteKey
      * 
-     * @return array The list of results 
+     * @return array|UpCloo_Model_Search_Response The list of results 
      */
     public function get($id, $virtualSiteKey = false)
     {

@@ -11,6 +11,7 @@ require_once $dirname . "/Http/Response.php";
 require_once $dirname . "/Model/Base.php";
 require_once $dirname . "/Model/Exception.php";
 require_once $dirname . "/Model/Search.php";
+require_once $dirname . "/Model/Search/Response.php";
 
 /*
 require_once $dirname . "/Zend/Application/Resource/Exception.php";
