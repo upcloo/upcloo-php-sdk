@@ -46,7 +46,7 @@ using ```search()``` method.
 $searchQuery = $manager->search()
     ->relevancy() //Force date relevancy
     ->query("Text to search")
-    ->facet("category");
+    ->facet("category")
     ->range() //maybe much more complex
     ->filterBy("category", "Web")
     ->network("a-partner-sitekey")
