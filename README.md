@@ -104,7 +104,13 @@ $search->network("first")->network("second");
 Is not useful including your sitekey because the sistem involve
 it by itself.
 
-### Ranges 
+### Ranges
+
+Range queries is a group and count with filter. It's a complex query. 
+When you are asking for a range query the system filter results automatically on 
+your range, after that group and counting elements into each group.
+That's enabled your software for move users into a fine grain searching 
+system.  
 
 Here the range method prototype
 
