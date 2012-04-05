@@ -35,7 +35,7 @@ class UpCloo_Model_Search_Response
             foreach ($root->docs->doc as $doc) {
                 $attr = $doc->attributes();
             
-                $m = new UpCloo_Model_Base();
+                $m = array();
                 $m["id"] = $attr["id"];
                 foreach ($doc as $key => $value) {
                     $m[$key] = (string)$value;
