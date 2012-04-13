@@ -239,7 +239,7 @@ class UpCloo_Model_Search
         }
         
         if ($this->_numPerPage) {
-            $searchNode->setAttribute("numPerPage", $this->_numPerPage);
+            $searchNode->setAttribute("numperpage", $this->_numPerPage);
         }
         
         if ($this->_relevancy) {
