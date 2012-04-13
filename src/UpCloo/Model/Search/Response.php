@@ -15,7 +15,7 @@ class UpCloo_Model_Search_Response
      * @param SimpleXMLElement $root
      * @return UpCloo_Model_Search_Response
      */
-    public static function fromResponse(SimpleXMLElement $root)
+    public static function fromResponse($root)
     {
         $model = new UpCloo_Model_Search_Response();
         
