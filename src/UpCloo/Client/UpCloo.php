@@ -100,7 +100,7 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
     
         $this->_client->setRawData($searchQuery->asXml());
     
-        $xml = @simplexml_load_string($this->_client->request(UpCloo_Http_Client::POST));
+        $xml = @simplexml_load_string($this->_client->request(UpCloo_Http_Client::POST)->getBody());
         
         //Modelize response
         $model = UpCloo_Model_Search_Response::fromResponse($xml);

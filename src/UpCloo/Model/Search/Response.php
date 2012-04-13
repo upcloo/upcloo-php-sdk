@@ -14,9 +14,15 @@ class UpCloo_Model_Search_Response
      * 
      * @param SimpleXMLElement $root
      * @return UpCloo_Model_Search_Response
+     * @throws UpCloo_Model_Exception In case of errors
      */
     public static function fromResponse($root)
     {
+        //TODO: check if error message
+        if (@count($root->message) > 0) {
+            throw new UpCloo_Model_Exception((string)$root->message, (int)$root->code);
+        }
+        
         $model = new UpCloo_Model_Search_Response();
         
         $model->_count = 0;
