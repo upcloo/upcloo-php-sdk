@@ -18,7 +18,6 @@ class UpCloo_Model_Search_Response
      */
     public static function fromResponse($root)
     {
-        //TODO: check if error message
         if (@count($root->message) > 0) {
             throw new UpCloo_Model_Exception((string)$root->message, (int)$root->code);
         }
@@ -58,7 +57,22 @@ class UpCloo_Model_Search_Response
                     $model->_suggests[$name][] = (string)$proposal;
                 }
             }
+            
+            if (property_exists($root->facets, "facet")) {
+                foreach ($root->facets->facet as $element) {
+                    $attr = $element->attributes();
+                    $name = (string)$attr["name"];
+                    $model->_facets[$name] = array();
+                    foreach ($element->element as $el) {
+                        $attr = $el->attributes();
+                        $count = (int)$attr["count"];
+
+                        $model->_facets[$name][(string)$el] = $count;
+                    }
+                }
+            }
         }
+        
         return $model;
     }
     
@@ -96,5 +110,10 @@ class UpCloo_Model_Search_Response
     public function getDocs()
     {
         return $this->_docs;
+    }
+    
+    public function getFacets()
+    {
+        return $this->_facets;
     }
 }

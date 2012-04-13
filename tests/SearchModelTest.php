@@ -172,15 +172,4 @@ class SearchModelTest extends PHPUnit_Framework_TestCase
         $attr = $xml->search->attributes();
         $this->assertEquals("default", (string)$attr["relevancy"]);
     }
-    
-    /**
-     * @expectedException     UpCloo_Model_Exception
-     * @expectedExceptionCode 1500
-     */
-    public function testErrorResponse()
-    {
-        $errorXML = simplexml_load_file(dirname(__FILE__) . '/data/error-1500.xml');
-        
-        $model = UpCloo_Model_Search_Response::fromResponse($errorXML);
-    }
 }
