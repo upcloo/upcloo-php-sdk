@@ -64,6 +64,16 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
     }
     
     /**
+     * Get the Http Client
+     * 
+     * @return UpCloo_Http_Client The HTTP Client
+     */
+    public function getHttpClient()
+    {
+    	return $this->_client;
+    }    
+    
+    /**
      * (non-PHPdoc)
      * @see UpCloo_Client_ClientInterface::index()
      */

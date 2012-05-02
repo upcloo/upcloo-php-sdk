@@ -7,14 +7,46 @@ class UpCloo_Http_Client
     
     const UPCLOO_USER_AGENT = 'UpCloo-SDK-1.0';
     
+    const TIMEOUT = 3;
+    
     private $_uri;
     private $_rawData;
+    
+    /**
+     * Define max connection timeout
+     * 
+     * @var int Max get timeout
+     */
+    private $_timeout;
     
     public function __construct($uri = false)
     {
         if ($uri) {
             $this->setUri($uri);
         }
+        
+        $this->setTimeout(self::TIMEOUT);
+    }
+    
+    /**
+     * Get default timeout connection
+     * 
+     * @return number Seconds for connection timeout
+     */
+    public function getTimeout()
+    {
+    	return $this->_timeout;
+    }
+    
+    /**
+     * Set default connection timeout in seconds
+     * 
+     * @param int $timeout
+     */
+    public function setTimeout($timeout)
+    {
+    	$timeout = intval($timeout);
+    	$this->_timeout = $timeout;
     }
     
     public function setUri($uri)
@@ -69,6 +101,7 @@ class UpCloo_Http_Client
             curl_setopt($ch, CURLOPT_HTTPHEADER,     array('Content-Type: text/xml'));
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST,  $method);
             curl_setopt($ch, CURLOPT_USERAGENT,      self::UPCLOO_USER_AGENT);
+            curl_setopt($ch, CURLOPT_CONNECTTIMEOUT, $this->getTimeout());
             
             $result=curl_exec ($ch);
             $headers = curl_getinfo($ch);

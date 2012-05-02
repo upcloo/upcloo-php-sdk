@@ -42,6 +42,21 @@ class BaseTest extends PHPUnit_Framework_TestCase
         $this->assertSame("helloS", $this->_instance->getSiteKey());
     }
     
+    public function testTimeoutSetterGetter()
+    {
+    	$instance = UpCloo_Manager::getInstance();
+    	$timeout = $instance->getClient()->getHttpClient()->getTimeout();
+    	
+    	$this->assertSame($timeout, UpCloo_Http_Client::TIMEOUT);
+    	
+    	$client = $instance->getClient()->getHttpClient();
+    	
+    	$client->setTimeout(2);
+    	$timeout = $instance->getClient()->getHttpClient()->getTimeout();
+    	
+    	$this->assertEquals($timeout, 2);
+    }
+    
     /**
      * @expectedException BadFunctionCallException 
      */
