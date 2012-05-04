@@ -23,16 +23,18 @@
 			<element count="2">Altro</element>
 		</facet>
 		<ranges>
-			<range count="541">2003-01-01T00:00:00Z</range>
-			<range count="2054">2004-01-01T00:00:00Z</range>
-			<range count="2490">2005-01-01T00:00:00Z</range>
-			<range count="1937">2006-01-01T00:00:00Z</range>
-			<range count="183">2007-01-01T00:00:00Z</range>
-			<range count="182">2008-01-01T00:00:00Z</range>
-			<range count="144">2009-01-01T00:00:00Z</range>
-			<range count="118">2010-01-01T00:00:00Z</range>
-			<range count="87">2011-01-01T00:00:00Z</range>
-			<range count="20">2012-01-01T00:00:00Z</range>
+		    <range name="publish_date">
+				<element count="541">2003-01-01T00:00:00Z</element>
+				<element count="2054">2004-01-01T00:00:00Z</element>
+				<element count="2490">2005-01-01T00:00:00Z</element>
+				<element count="1937">2006-01-01T00:00:00Z</element>
+				<element count="183">2007-01-01T00:00:00Z</element>
+				<element count="182">2008-01-01T00:00:00Z</element>
+				<element count="144">2009-01-01T00:00:00Z</element>
+				<element count="118">2010-01-01T00:00:00Z</element>
+				<element count="87">2011-01-01T00:00:00Z</element>
+				<element count="20">2012-01-01T00:00:00Z</element>
+			</range>
 		</ranges>
 	</facets>
 	<suggestions />

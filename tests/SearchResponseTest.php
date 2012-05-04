@@ -113,5 +113,58 @@ class SearchResponseTest
         $this->assertSame(2, $categories["Altro"]);
         
     }
+
+    public function testRanges()
+    {
+        $xml = simplexml_load_file(dirname(__FILE__) . '/data/full-response.xml');
         
+        $model = UpCloo_Model_Search_Response::fromResponse($xml);
+        
+        $ranges = $model->getRanges();
+        
+        $this->assertEquals("1", count($ranges));
+        
+        $names = array_keys($ranges);
+        
+        $this->assertEquals("publish_date", $names[0]);
+        
+        $publishDate = $ranges["publish_date"];
+        $publishDateKeys = array_keys($publishDate);
+        
+        $this->assertEquals(10, count($publishDateKeys));
+        
+        $this->assertEquals("2003-01-01T00:00:00Z", $publishDateKeys[0]);
+        $this->assertEquals("2004-01-01T00:00:00Z", $publishDateKeys[1]);
+        $this->assertEquals("2005-01-01T00:00:00Z", $publishDateKeys[2]);
+        $this->assertEquals("2006-01-01T00:00:00Z", $publishDateKeys[3]);
+        $this->assertEquals("2007-01-01T00:00:00Z", $publishDateKeys[4]);
+        $this->assertEquals("2008-01-01T00:00:00Z", $publishDateKeys[5]);
+        $this->assertEquals("2009-01-01T00:00:00Z", $publishDateKeys[6]);
+        $this->assertEquals("2010-01-01T00:00:00Z", $publishDateKeys[7]);
+        $this->assertEquals("2011-01-01T00:00:00Z", $publishDateKeys[8]);
+        $this->assertEquals("2012-01-01T00:00:00Z", $publishDateKeys[9]);
+        
+        $this->assertSame(541, $publishDate["2003-01-01T00:00:00Z"]);
+        $this->assertSame(2054, $publishDate["2004-01-01T00:00:00Z"]);
+        $this->assertSame(2490, $publishDate["2005-01-01T00:00:00Z"]);
+        $this->assertSame(1937, $publishDate["2006-01-01T00:00:00Z"]);
+        $this->assertSame(183, $publishDate["2007-01-01T00:00:00Z"]);
+        $this->assertSame(182, $publishDate["2008-01-01T00:00:00Z"]);
+        $this->assertSame(144, $publishDate["2009-01-01T00:00:00Z"]);
+        $this->assertSame(118, $publishDate["2010-01-01T00:00:00Z"]);
+        $this->assertSame(87, $publishDate["2011-01-01T00:00:00Z"]);
+        $this->assertSame(20, $publishDate["2012-01-01T00:00:00Z"]);
+    }
+    
+    public function testEmptyRanges()
+    {
+        $xml = simplexml_load_file(dirname(__FILE__) . '/data/simple.xml');
+        
+        $model = UpCloo_Model_Search_Response::fromResponse($xml);
+        
+        $ranges = $model->getRanges();
+        
+        $this->assertInternalType("array", $ranges);
+        $this->assertEquals(0, count($ranges));
+    }
 }

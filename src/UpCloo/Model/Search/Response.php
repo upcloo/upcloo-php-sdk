@@ -71,6 +71,20 @@ class UpCloo_Model_Search_Response
                     }
                 }
             }
+            
+            if (property_exists($root->facets->ranges, "range")) {
+                foreach ($root->facets->ranges->range as $range) {
+                    $attr = $range->attributes();
+                    $name = (string)$attr["name"];
+                    $model->_ranges[$name] = array();
+                    foreach ($range->element as $r) {
+                        $attr = $r->attributes();
+                        $count = (int)$attr["count"];
+                        
+                        $model->_ranges[$name][(string)$r] = $count;
+                    }
+                }
+            }
         }
         
         return $model;
@@ -115,5 +129,10 @@ class UpCloo_Model_Search_Response
     public function getFacets()
     {
         return $this->_facets;
+    }
+    
+    public function getRanges()
+    {
+        return $this->_ranges;
     }
 }
