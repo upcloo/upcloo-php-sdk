@@ -69,9 +69,6 @@ class UpCloo_Zend_Application_Resource_UpCloo
             $instance->setClient($client);
         }
         
-        $vsitekeys = $options["virtuals"];
-        $instance->setVirtualSiteKeys($vsitekeys);
-        
         return $instance;
     }
 }
