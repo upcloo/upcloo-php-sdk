@@ -306,26 +306,33 @@ class UpCloo_Manager
      * Activating local storage allow the continuous indexing
      * without problems.
      * 
-     * @param string $path
+     * @param string|PDO $path A dedicated storage path or a valid 
+     * PDO instance
      * @throws Exception In case of storage creation
      */
     public function useStorage($path)
     {
         $create = false;
-        if (!$path || !is_string($path) || empty($path)) {
-            throw new Exception("You must se a valid path");
+        if (is_string($path)) {
+            if (empty(trim($path))) {
+                throw new Exception("You must set a valid path");
+            } else {
+                if (!file_exists($path)) {
+                    touch($path);
+                    $create = true;
+                }
+            }
+            
+            if (!$this->_storage) {
+                $this->_storage = new PDO("sqlite://" . $path);
+                if ($create) {
+                    $this->_createStorage;
+                }
+            }
+        } else if ($path instanceof PDO) {
+            $this->_storage = $path;
         } else {
-            if (!file_exists($path)) {
-                touch($path);
-                $create = true;
-            }
-        }
-        
-        if (!$this->_storage) {
-            $this->_storage = new PDO("sqlite://" . $path);
-            if ($create) {
-                $this->_createStorage;
-            }
+            throw new Exception("Your must set a valid Storage or valid Path");
         }
     }
     
