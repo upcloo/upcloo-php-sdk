@@ -25,6 +25,28 @@ $manager->get("1243");
 
 See [wiki pages](upcloo-php-sdk/wiki) for more information.
 
+### Using local storage
+
+Using the local storage indicates that you can require the
+indexing of a content without consider that this content was
+already sent to UpCloo.
+
+UpCloo SDK provide a local storage for save indexing operation.
+This storage simplify the recording operation for reduce your
+indexing requests.
+
+During your bootstrap request to use UpCloo local storage
+```php
+<?php
+//Boot the storage
+$manager->useStorage(dirname(__FILE__) . '/system/dbs/upcloo.sqlite');
+```
+
+In the previous example we indicate that UpCloo must use a storage
+located at path `/system/dbs` (from the bootstrap file position) and
+the filename is `upcloo.sqlite`. If the storage doens't exists 
+UpCloo SDK create it from scratch.
+
 ## Search Queries
 
 Now search query are handled by this library 
