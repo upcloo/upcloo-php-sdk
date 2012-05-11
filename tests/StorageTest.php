@@ -22,7 +22,7 @@ class StorageTest
         
         $stub->expects($this->any())
             ->method('index')
-            ->will($this->onConsecutiveCalls(true, false));
+            ->will($this->onConsecutiveCalls(true, false, false, false));
         
         $manager->setClient($stub);
         
@@ -52,5 +52,11 @@ class StorageTest
         $result = $stmt->fetchColumn(0);
         
         $this->assertEquals(1, $result);
+        
+        $ret3 = $manager->index(
+            array('id' => 'first', 'title'=> 'ok'), 
+            array(UpCloo_Manager::FORCE=> true)
+        );
+        $this->assertFalse($ret3);
     }
 }
