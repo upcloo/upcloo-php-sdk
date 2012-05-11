@@ -1,4 +1,5 @@
 <?php
+
 /**
  * 
  * The UpCloo base simple manager for baseline PHP application
