@@ -50,6 +50,13 @@ class UpCloo_Manager
     const SEARCH_ENDPOINT = "http://search.upcloo.com/search/rest";
     
     /**
+     * Internal Storage name
+     * 
+     * @var string
+     */
+    const STORAGE_NAME = "UpClooStatus";
+    
+    /**
      * The single instance
      * 
      * @var UpCloo_Manager
@@ -88,6 +95,12 @@ class UpCloo_Manager
      * @var array
      */
     private $_virtualSitekeys = false;
+    
+    /**
+     * 
+     * @var PDO
+     */
+    private $_storage;
     
     /**
      * Constructor is protected for singleton pattern
@@ -253,7 +266,13 @@ class UpCloo_Manager
         
         $this->getClient()->setUsername($this->getUsername());
         
-        return $this->getClient()->index($model);
+        $status = $this->getClient()->index($model);
+        
+        if ($this->_storage && $status) {
+            $this->_register($model["id"]);
+        }
+        
+        return $status;
     }
     
     /**
@@ -264,6 +283,56 @@ class UpCloo_Manager
     public function search()
     {
         return new UpCloo_Model_Search();
+    }
+    
+    /**
+     * Use local storage for using index method
+     * 
+     * Activating local storage allow the continuous indexing
+     * without problems.
+     * 
+     * @param string $path
+     * @throws Exception In case of storage creation
+     */
+    public function useStorage($path)
+    {
+        $create = false;
+        if (!$path || !is_string($path) || empty($path)) {
+            throw new Exception("You must se a valid path");
+        } else {
+            if (!file_exists($path)) {
+                touch($path);
+                $create = true;
+            }
+        }
+        
+        if (!$this->_storage) {
+            $this->_storage = new PDO("sqlite://" . $path);
+            if ($create) {
+                $this->_createStorage;
+            }
+        }
+    }
+    
+    /**
+     * Create a valid storage.
+     */
+    private function _createStorage()
+    {
+        $query = "CREATE TABLE IF NOT EXISTS " . STORAGE_NAME . " (content_id INTEGER PRIMARY KEY AUTOINCREMENT)";
+        $this->_storage->exec($query);
+    }
+    
+    /**
+     * Record that id into the storage
+     * 
+     * @param string $id
+     */
+    private function _register($id)
+    {
+        $query = "INSERT INTO " . STORAGE_NAME . " (content_id) VALUES (?)";
+        $cmd = $this->_storage->prepare($query);
+        $cmd->execute(array($id));
     }
     
     /**
