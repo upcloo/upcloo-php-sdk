@@ -58,6 +58,13 @@ class UpCloo_Manager
     const STORAGE_NAME = "UpClooStatus";
     
     /**
+     * Key of options (index force)
+     * 
+     * @var string
+     */
+    const FORCE = "force";
+    
+    /**
      * The single instance
      * 
      * @var UpCloo_Manager
@@ -251,12 +258,13 @@ class UpCloo_Manager
      * Index new contents or update
      * 
      * @param array|UpCloo_Model_Base $model
+     * @param array $options A key valued options for the indexer.
      *
      * @return boolean The result of operation.
      * 
      * @throws UpCloo_Model_Exception In case of errors
      */
-    public function index($model)
+    public function index($model, array $options = array())
     {
         if (is_array($model)) {
             $model = UpCloo_Model_Base::fromArray($model);
@@ -267,8 +275,14 @@ class UpCloo_Manager
         
         $this->getClient()->setUsername($this->getUsername());
         
-        $status = $this->getClient()->index($model);
+        //If no storage or content missing into the storage. Index it
+        if (!$this->_storage || 
+                ($this->_storage && !$this->_isRegistered($model["id"])) || 
+                (array_key_exists(self::FORCE, $options) && $options[self::FORCE] === true)) {
+            $status = $this->getClient()->index($model);
+        }
         
+        // Storage required record that it is saved if status is OK.
         if ($this->_storage && $status) {
             $this->_register($model["id"]);
         }
@@ -320,7 +334,7 @@ class UpCloo_Manager
      */
     private function _createStorage()
     {
-        $query = "CREATE TABLE IF NOT EXISTS " . STORAGE_NAME . " (content_id INTEGER PRIMARY KEY AUTOINCREMENT)";
+        $query = "CREATE TABLE IF NOT EXISTS " . STORAGE_NAME . " (content_id VARCHAR(255) PRIMARY KEY AUTOINCREMENT)";
         $this->_storage->exec($query);
     }
     
@@ -334,6 +348,26 @@ class UpCloo_Manager
         $query = "INSERT INTO " . STORAGE_NAME . " (content_id) VALUES (?)";
         $cmd = $this->_storage->prepare($query);
         $cmd->execute(array($id));
+    }
+    
+    /**
+     * Check if a content is already in the storage.
+     * 
+     * @param string $id
+     * @return mixed|boolean FALSE if missing, the content_id if present.
+     */
+    private function _isRegistered($id)
+    {
+        $query = "SELECT content_id FROM " . STORAGE_NAME . " WHERE content_id = ?";
+        $cmd = $this->_storage->prepare($query);
+        $cmd->execute(array($id));
+        $result = $cmd->fetchColumn(0);
+        
+        if ($result) {
+            return $result;
+        } else {
+            return false;
+        }
     }
     
     /**
