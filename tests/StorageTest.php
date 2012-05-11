@@ -8,8 +8,7 @@ class StorageTest
     {
         parent::setUp();
 
-//         $this->_pdo = new PDO("sqlite::memory:");
-        $this->_pdo = new PDO("sqlite:///".dirname(__FILE__)."/t");
+        $this->_pdo = new PDO("sqlite::memory:");
         $this->_pdo->exec("DROP TABLE " . UpCloo_Manager::STORAGE_NAME);
         UpCloo_Manager::getInstance()->useStorage($this->_pdo);
     }
