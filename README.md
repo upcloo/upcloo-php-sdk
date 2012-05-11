@@ -47,6 +47,24 @@ located at path `/system/dbs` (from the bootstrap file position) and
 the filename is `upcloo.sqlite`. If the storage doens't exists 
 UpCloo SDK create it from scratch.
 
+### Storage structure
+
+The UpCloo storage system use a very simple structure. It store
+locally all contents sent to the UpCloo indexer. In this way you
+can simplify the UpCloo integration.
+
+```
++==========================+
++      UpClooContents      +         
++==========================+
++    your_content_id_1     +
++--------------------------+
++    your_content_id_2     +
++--------------------------+
++    your_content_id_3     +
++--------------------------+
+```
+
 ## Search Queries
 
 Now search query are handled by this library 
