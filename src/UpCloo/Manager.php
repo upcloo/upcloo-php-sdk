@@ -134,7 +134,8 @@ class UpCloo_Manager
     {
         if (!self::$_instance) {
             self::$_instance = new self();
-            
+
+            self::$_instance->_storage = false;
             //Default set the client
             self::$_instance->setClient(
                 new UpCloo_Client_UpCloo()
@@ -275,16 +276,17 @@ class UpCloo_Manager
         
         $this->getClient()->setUsername($this->getUsername());
         
+        $status = true;
         //If no storage or content missing into the storage. Index it
         if (!$this->_storage || 
                 ($this->_storage && !$this->_isRegistered($model["id"])) || 
                 (array_key_exists(self::FORCE, $options) && $options[self::FORCE] === true)) {
             $status = $this->getClient()->index($model);
-        }
-        
-        // Storage required record that it is saved if status is OK.
-        if ($this->_storage && $status) {
-            $this->_register($model["id"]);
+            
+            // Storage required record that it is saved if status is OK.
+            if ($this->_storage && $status) {
+                $this->_register($model["id"]);
+            }
         }
         
         return $status;
@@ -314,26 +316,31 @@ class UpCloo_Manager
     {
         $create = false;
         if (is_string($path)) {
-            if (empty(trim($path))) {
+            $path = trim($path);
+            if (empty($path)) {
                 throw new Exception("You must set a valid path");
-            } else {
-                if (!file_exists($path)) {
-                    touch($path);
-                    $create = true;
-                }
-            }
+            } 
             
             if (!$this->_storage) {
                 $this->_storage = new PDO("sqlite://" . $path);
-                if ($create) {
-                    $this->_createStorage;
-                }
+                $this->_createStorage();
             }
         } else if ($path instanceof PDO) {
             $this->_storage = $path;
+            $this->_createStorage();
         } else {
             throw new Exception("Your must set a valid Storage or valid Path");
         }
+    }
+    
+    /**
+     * Retrive the actual storage
+     * 
+     * @return PDO The storage model
+     */
+    public function getStorage()
+    {
+        return $this->_storage;
     }
     
     /**
@@ -341,7 +348,7 @@ class UpCloo_Manager
      */
     private function _createStorage()
     {
-        $query = "CREATE TABLE IF NOT EXISTS " . STORAGE_NAME . " (content_id VARCHAR(255) PRIMARY KEY AUTOINCREMENT)";
+        $query = "CREATE TABLE IF NOT EXISTS " . self::STORAGE_NAME . " (content_id VARCHAR(255) PRIMARY KEY)";
         $this->_storage->exec($query);
     }
     
@@ -352,9 +359,11 @@ class UpCloo_Manager
      */
     private function _register($id)
     {
-        $query = "INSERT INTO " . STORAGE_NAME . " (content_id) VALUES (?)";
-        $cmd = $this->_storage->prepare($query);
-        $cmd->execute(array($id));
+        if ($this->_storage) {
+            $query = "INSERT INTO " . self::STORAGE_NAME . " (content_id) VALUES (?)";
+            $cmd = $this->_storage->prepare($query);
+            $cmd->execute(array($id));
+        }
     }
     
     /**
@@ -365,13 +374,21 @@ class UpCloo_Manager
      */
     private function _isRegistered($id)
     {
-        $query = "SELECT content_id FROM " . STORAGE_NAME . " WHERE content_id = ?";
-        $cmd = $this->_storage->prepare($query);
-        $cmd->execute(array($id));
-        $result = $cmd->fetchColumn(0);
-        
-        if ($result) {
-            return $result;
+        if ($this->_storage) {
+            $query = "SELECT content_id FROM " . self::STORAGE_NAME . " WHERE content_id = ?";
+            $cmd = $this->_storage->prepare($query);
+            if ($cmd) {
+                $cmd->execute(array($id));
+                $result = $cmd->fetchColumn(0);
+                
+                if ($result) {
+                    return $result;
+                } else {
+                    return false;
+                }
+            } else {
+                throw new Exception("Unable to store this record into the storage");
+            }
         } else {
             return false;
         }

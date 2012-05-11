@@ -21,6 +21,7 @@
             <directory>.</directory>
         </testsuite>
     </testsuites>
+    <!-- 
     <logging>
         <log type="coverage-html" target="../res/report" charset="UTF-8"
             yui="true" highlight="false"
@@ -28,6 +29,7 @@
         <log type="junit" target="../res/logfile.xml" logIncompleteSkipped="false"/>
         <log type="testdox-text" target="../res/testdox.txt"/>
     </logging>
+     -->
     <filter>
   <blacklist>
     <directory suffix=".php">../vendor/php-file-iterator</directory>
