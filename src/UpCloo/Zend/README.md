@@ -8,13 +8,13 @@ for bootstraping the library and other things.
 In your ```application.ini``` you have to load the UpCloo
 resources namespace and the UpCloo general namespace as follow
 
-```
+```ini
 autoloadernamespaces.UpCloo = "UpCloo_"
 ```
 
 After that you have to load the resource section
 
-```
+```ini
 ;Consider the real path where you put UpCloo library
 pluginPaths.UpCloo_Zend_Application_Resource = APPLICATION_PATH "/library/UpCloo/Zend/Application/Resource"
 ```
@@ -32,7 +32,7 @@ resources.upcloo.sitekey = "your-sitekey"
 If you want a read-only UpCloo instance for your testing scope you can use the
 ```UpClooMock``` client.
 
-```
+```ini
 [testing : production]
 resources.upcloo.client = "UpClooMock"
 
