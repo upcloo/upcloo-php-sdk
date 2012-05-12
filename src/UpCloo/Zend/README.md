@@ -21,12 +21,10 @@ pluginPaths.UpCloo_Zend_Application_Resource = APPLICATION_PATH "/library/UpCloo
 
 Now you are ready for load it as follow:
 
-```
+```ini
 resources.upcloo.username = "your-username"
 resources.upcloo.password = "your-password"
 resources.upcloo.sitekey = "your-sitekey"
-resources.upcloo.virtuals.mykey = "this-vsitekey"
-resources.upcloo.virtuals.ankey = "another-vsitekey"
 ```
 
 ## Bootstrap resource in test (read-only)
