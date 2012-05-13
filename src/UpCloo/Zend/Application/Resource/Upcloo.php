@@ -69,6 +69,13 @@ class UpCloo_Zend_Application_Resource_UpCloo
             $instance->setClient($client);
         }
         
+        //Attach the storage
+        if (array_key_exists("storage", $options)) {
+            $storage = trim($options["storage"]);
+            
+            $instance->useStorage($storage);
+        }
+        
         return $instance;
     }
 }

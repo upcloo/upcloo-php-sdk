@@ -27,6 +27,16 @@ resources.upcloo.password = "your-password"
 resources.upcloo.sitekey = "your-sitekey"
 ```
 
+## Bootstrap with local storage
+
+You can start the library using the local storage
+
+```ini
+resources.upcloo.storage = APPLICATION_PATH "/../system/storage.db"
+```
+
+UpCloo library starts using the local storage.
+
 ## Bootstrap resource in test (read-only)
 
 If you want a read-only UpCloo instance for your testing scope you can use the
