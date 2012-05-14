@@ -418,4 +418,23 @@ class UpCloo_Manager
             return $this->_client->get($id, $virtualSiteKey);
         }
     }
+    
+    /**
+     * Delete a content
+     * 
+     * @param string The identification string
+     * 
+     * @return boolean false if fails, true in case of success
+     * 
+     * @throws Exception in case of errors (If you skip the ID)
+     */
+    public function delete($id)
+    {
+        $model = new UpCloo_Model_Base();
+        $model["id"] = $id;
+        $model["sitekey"] = $this->getSiteKey();
+        $model["password"] = $this->getPassword();
+        
+        return $this->getClient()->delete($model);
+    }
 }
