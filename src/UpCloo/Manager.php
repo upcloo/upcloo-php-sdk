@@ -460,7 +460,8 @@ class UpCloo_Manager
         $model["id"] = $id;
         $model["sitekey"] = $this->getSiteKey();
         $model["password"] = $this->getPassword();
-        
+
+        $this->getClient()->setUsername($this->getUsername());
         $status =  $this->getClient()->delete($model);
         
         if ($status && $this->_storage) {
