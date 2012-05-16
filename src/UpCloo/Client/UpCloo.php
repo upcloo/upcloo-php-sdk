@@ -178,6 +178,15 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
         }
     }
     
+    /**
+     * Send the invalidation command
+     * 
+     * @param UpCloo_Model_Base $model The base model
+     * 
+     * @return boolean The status 
+     * 
+     * @throws UpCloo_Model_Exception In case of errors
+     */
     public function delete(UpCloo_Model_Base $model)
     {
         if (!$model["id"]) {
@@ -188,6 +197,13 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
         return $this->_delete($model);
     }
     
+    /**
+     * Send the invalidation command using the Http client
+     * 
+     * @param UpCloo_Model_Base $model The model to delete
+     * 
+     * @return boolean If success TRUE, FALSE otherwise
+     */
     public function _delete(UpCloo_Model_Base $model)
     {
         $this->_client->setRawData($model->asXml());
