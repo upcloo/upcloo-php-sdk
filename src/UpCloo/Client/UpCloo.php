@@ -94,7 +94,7 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
         
         $response = $this->_client->request(UpCloo_Http_Client::POST);
         
-        return ($response->getStatus() == 200);
+        return ($response->getStatus() == 200 || $response->getStatus() == 202);
     }
     
     /**
@@ -176,6 +176,41 @@ class UpCloo_Client_UpCloo implements UpCloo_Client_ClientInterface
         } else {
             return array();
         }
+    }
+    
+    /**
+     * Send the invalidation command
+     * 
+     * @param UpCloo_Model_Base $model The base model
+     * 
+     * @return boolean The status 
+     * 
+     * @throws UpCloo_Model_Exception In case of errors
+     */
+    public function delete(UpCloo_Model_Base $model)
+    {
+        if (!$model["id"]) {
+            throw new UpCloo_Model_Exception("You must provide the content id");
+        }
+        $this->_client->setUri(sprintf(UpCloo_Manager::UPDATE_END_POINT, $this->getUsername()));
+        
+        return $this->_delete($model);
+    }
+    
+    /**
+     * Send the invalidation command using the Http client
+     * 
+     * @param UpCloo_Model_Base $model The model to delete
+     * 
+     * @return boolean If success TRUE, FALSE otherwise
+     */
+    public function _delete(UpCloo_Model_Base $model)
+    {
+        $this->_client->setRawData($model->asXml());
+        
+        $response = $this->_client->request(UpCloo_Http_Client::DELETE);
+        
+        return ($response->getStatus() == 200 || $response->getStatus() == 202);
     }
     
     /**

@@ -387,11 +387,37 @@ class UpCloo_Manager
                     return false;
                 }
             } else {
-                throw new Exception("Unable to store this record into the storage");
+                throw new Exception("Unable to store this record into the storage: {$id}");
             }
         } else {
             return false;
         }
+    }
+    
+    /**
+     * Delete the record phisically from the storage
+     * 
+     * @param string $id
+     * @throws Exception
+     */
+    private function _delete($id)
+    {
+        if ($this->_storage) {
+            $query = "DELETE FROM " . self::STORAGE_NAME . " WHERE content_id = ?";
+            $cmd = $this->_storage->prepare($query);
+            if ($cmd) {
+                $cmd->execute(array($id));
+                $result = $cmd->fetchColumn(0);
+            
+                if ($result) {
+                    return $result;
+                } else {
+                    return false;
+                }
+            } else {
+                throw new Exception("Unable to delete this record: {$id}.");
+            }
+        } 
     }
     
     /**
@@ -417,5 +443,31 @@ class UpCloo_Manager
         } else {
             return $this->_client->get($id, $virtualSiteKey);
         }
+    }
+    
+    /**
+     * Delete a content
+     * 
+     * @param string The identification string
+     * 
+     * @return boolean false if fails, true in case of success
+     * 
+     * @throws Exception in case of errors (If you skip the ID)
+     */
+    public function delete($id)
+    {
+        $model = new UpCloo_Model_Base();
+        $model["id"] = $id;
+        $model["sitekey"] = $this->getSiteKey();
+        $model["password"] = $this->getPassword();
+
+        $this->getClient()->setUsername($this->getUsername());
+        $status =  $this->getClient()->delete($model);
+        
+        if ($status && $this->_storage) {
+            $this->_delete($id);
+        }
+        
+        return $status;
     }
 }

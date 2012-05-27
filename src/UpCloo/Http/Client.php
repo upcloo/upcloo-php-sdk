@@ -4,6 +4,7 @@ class UpCloo_Http_Client
     const PUT = 'PUT';
     const GET = 'GET';
     const POST = 'POST';
+    const DELETE = "DELETE";
     
     const UPCLOO_USER_AGENT = 'UpCloo-SDK-1.0';
     
@@ -90,7 +91,7 @@ class UpCloo_Http_Client
         $response = new UpCloo_Http_Response();
         $uri = $this->getUri();
         
-        if ($method == self::PUT || $method == self::POST) {
+        if ($method == self::PUT || $method == self::POST || $method == self::DELETE) {
             /* raw post on curl module */
             $ch = curl_init();
             
