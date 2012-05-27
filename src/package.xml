@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<package packagerversion="1.8.0" version="2.0" xmlns="http://pear.php.net/dtd/package-2.0" xmlns:tasks="http://pear.php.net/dtd/tasks-1.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://pear.php.net/dtd/tasks-1.0
+    http://pear.php.net/dtd/tasks-1.0.xsd
+    http://pear.php.net/dtd/package-2.0
+    http://pear.php.net/dtd/package-2.0.xsd">
+ <name>UpCloo_Manager</name>
+ <channel>pear.corley.it</channel>
+ <summary>UpCloo PHP SDK, correlations and searches in the cloud.</summary>
+ <description>
+   UpCloo is a cloud based and fully hosted indexing engine that helps you 
+to create incredible and automatic correlations between contents of your website.
+ </description>
+ <lead>
+  <name>Walter Dal Mut</name>
+  <user>wdalmut</user>
+  <email>info at corley.it</email>
+  <active>yes</active>
+ </lead>
+ <date>2012-05-27</date>
+ <time>16:00:00</time>
+ <version>
+  <release>0.11.0</release>
+  <api>0.11.0</api>
+ </version>
+ <stability>
+  <release>beta</release>
+  <api>beta</api>
+ </stability>
+ <license uri="http://www.opensource.org/licenses/mit-license.php">MIT</license>
+ <notes>-</notes>
+ <contents>
+   <dir name="" baseinstalldir="/">
+     <dir name="UpCloo">
+       <file role="php" name="Manager.php" />
+       <file role="php" name="Autoloader.php" />
+       <dir name="Client">
+         <file role="php" name="ClientInterface.php" />
+         <file role="php" name="UpCloo.php" />
+         <file role="php" name="UpClooMock.php" />
+       </dir>
+       <dir name="Http">
+         <file role="php" name="Client.php" />
+         <file role="php" name="Exception.php" />
+         <file role="php" name="Response.php" />
+       </dir>
+       <dir name="Model">
+         <file role="php" name="Base.php" />
+         <file role="php" name="Exception.php" />
+         <file role="php" name="Search.php" />
+         <dir name="Search">
+           <file role="php" name="Response.php" />
+         </dir>
+       </dir>
+       <dir name="Zend">
+         <dir name="Application">
+           <dir name="Resource">
+             <file role="php" name="Exception.php"/>
+             <file role="php" name="Upcloo.php" />
+           </dir>
+         </dir>
+       </dir>
+     </dir>
+   </dir>
+ </contents>
+ <dependencies>
+  <required>
+   <php>
+    <min>5.2.0</min>
+   </php>
+   <pearinstaller>
+    <min>1.4.0</min>
+   </pearinstaller>
+  </required>
+ </dependencies>
+ <phprelease />
+</package>
