@@ -324,7 +324,7 @@ class UpCloo_Manager
             } 
             
             if (!$this->_storage) {
-                $this->_storage = new PDO("sqlite://" . $path);
+                $this->_storage = new PDO("sqlite:" . $path);
                 $this->_createStorage();
             }
         } else if ($path instanceof PDO) {
