@@ -15,7 +15,7 @@ $manager->index(
     array(
         'id' => '1243',
         'title' => 'Hello world',
-        'link' => 'http://my-domain.ltd/hello-world'
+        'url' => 'http://my-domain.ltd/hello-world'
     )
 );
 
