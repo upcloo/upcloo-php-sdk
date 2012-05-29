@@ -63,20 +63,20 @@ to create incredible and automatic correlations between contents of your website
              <file role="php" name="Exception.php"/>
              <file role="php" name="Upcloo.php" />
            </dir>
-           <dir name="Controller">
-             <dir name="Action">
-               <dir name="Helper">
-                 <file role="php" name="Upcloo.php" />
-               </dir>
-             </dir>  
-             <dir name="Plugin">
-               <file role="php" name="UpClooRemoteImporter.php"/>
-             </dir>
-           </dir>
-           <dir name="View">
+         </dir>
+         <dir name="Controller">
+           <dir name="Action">
              <dir name="Helper">
-               <file role="php" name="Upcloo.php"/>
+               <file role="php" name="Upcloo.php" />
              </dir>
+           </dir>  
+           <dir name="Plugin">
+             <file role="php" name="UpClooRemoteImporter.php"/>
+           </dir>
+         </dir>
+         <dir name="View">
+           <dir name="Helper">
+             <file role="php" name="Upcloo.php"/>
            </dir>
          </dir>
        </dir>
