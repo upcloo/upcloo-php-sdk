@@ -56,7 +56,7 @@ class UpCloo_Zend_Application_Resource_UpCloo
         );
         
         //Override the default client
-        if ($options["client"]) {
+        if (array_key_exists("client", $options)) {
             $classname = "UpCloo_Client_{$options["client"]}";
             
             $client = null;

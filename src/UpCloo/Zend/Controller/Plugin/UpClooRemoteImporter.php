@@ -45,6 +45,11 @@ class UpCloo_Zend_Controller_Plugin_UpClooRemoteImporter
     
     private function getFieldDefinition($key, $value)
     {
-        return sprintf("<!-- UPCLOO_POST_%s %s UPCLOO_POST_%s -->", strtoupper($key), $value, strtoupper($key));
+        return sprintf(
+        	"<!-- UPCLOO_POST_%s %s UPCLOO_POST_%s -->" . PHP_EOL, 
+            strtoupper($key), 
+            $value, 
+            strtoupper($key)
+        );
     }
 }
