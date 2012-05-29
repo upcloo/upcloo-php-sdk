@@ -64,6 +64,8 @@ class UpCloo_Manager
      */
     const FORCE = "force";
     
+    const META_FIELDS = 'UpClooMetaFields';
+    
     /**
      * The single instance
      * 
