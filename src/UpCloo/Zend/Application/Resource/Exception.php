@@ -7,7 +7,7 @@
  * bootstrap operation.
  *
  * @author Walter Dal Mut
- * @package 
+ * @package UpCloo_Zend_Application_Resource
  * @license MIT
  *
  * Copyright (C) 2011 Walter Dal Mut, Gabriele Mittica

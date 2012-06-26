@@ -6,7 +6,7 @@
  * This exception is used in case of models failures
  *
  * @author Walter Dal Mut
- * @package 
+ * @package UpCloo_Model
  * @license MIT
  *
  * Copyright (C) 2011 Walter Dal Mut, Gabriele Mittica
