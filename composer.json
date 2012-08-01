@@ -1,0 +1,38 @@
+{
+    "name": "corley/upcloo-php-sdk",
+    "description": "UpCloo PHP SDK",
+    "version":"0.12.0",
+    "type":"library",
+    "keywords":["upcloo","correlation","links","related"],
+    "time":"2012-06-01",
+    "license":"MIT",
+    "authors": [
+        {
+            "name":"Walter Dal Mut",
+            "email":"walter.dalmut@corley.it",
+            "homepage":"http://walterdalmut.com",
+            "role":"Developer"
+        },
+        {
+            "name":"Gabriele Mittica",
+            "email":"gabriele.mittica@corley.it",
+            "homepage":"http://gabrielemittica.com",
+            "role":"Developer"
+        }
+    ],
+    "support": {
+        "email":"info@corley.it"
+    },
+    "require": {
+        "php": ">=5.2.4"
+    },
+    "autoload": {
+        "psr-0": ["src/"]
+    },
+    "repositories": [
+        {
+            "type": "vcs",
+            "url": "https://github.com/corley/upcloo-php-sdk.git"
+        }
+    ]
+}
