@@ -116,7 +116,7 @@ class UpCloo_Manager
      * Constructor is protected for singleton pattern
      * 
      */
-    protected function __construct() {}
+    public function __construct() {}
     
     /**
      * Clone is not supported 
