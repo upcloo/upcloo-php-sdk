@@ -47,7 +47,7 @@ class UpCloo_FactoryTest extends PHPUnit_Framework_TestCase
     
     public function testUsingStorage()
     {
-        $storage = new PDO("sqlite::memory");
+        $storage = new PDO("sqlite::memory:");
         $upcloo = UpCloo_Factory::factory(
             "UpCloo",
             array(
