@@ -8,7 +8,7 @@ This library is intended for working with PHP 5.2+
 <?php
 $manager = UpCloo_Manager::getInstance();
 //Setting up credentials
-$manager->setCredential("username", "password", "sitekey");
+$manager->setCredential("en-xx00XXxxx");
 
 //Get correlation of the indexed content
 $manager->get("http://www.domain.tld/folder/content.html");
