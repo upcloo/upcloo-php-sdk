@@ -10,180 +10,15 @@ $manager = UpCloo_Manager::getInstance();
 //Setting up credentials
 $manager->setCredential("username", "password", "sitekey");
 
-//Index a new content
-$manager->index(
-    array(
-        'id' => '1243',
-        'title' => 'Hello world',
-        'url' => 'http://my-domain.ltd/hello-world'
-    )
-);
-
 //Get correlation of the indexed content
-$manager->get("1243");
+$manager->get("http://www.domain.tld/folder/content.html");
 ```
 
 See [wiki pages](upcloo-php-sdk/wiki) for more information.
 
-### Using local storage
-
-Using the local storage indicates that you can require the
-indexing of a content without consider that this content was
-already sent to UpCloo.
-
-UpCloo SDK provide a local storage for save indexing operation.
-This storage simplify the recording operation for reduce your
-indexing requests.
-
-During your bootstrap request to use UpCloo local storage
-```php
-<?php
-//Boot the storage
-$manager->useStorage(dirname(__FILE__) . '/system/dbs/upcloo.sqlite');
-```
-
-In the previous example we indicate that UpCloo must use a storage
-located at path `/system/dbs` (from the bootstrap file position) and
-the filename is `upcloo.sqlite`. If the storage doens't exists 
-UpCloo SDK create it from scratch.
-
-### Storage structure
-
-The UpCloo storage system use a very simple structure. It store
-locally all contents sent to the UpCloo indexer. In this way you
-can simplify the UpCloo integration.
-
-```
-+==========================+
-+      UpClooContents      +         
-+==========================+
-+    your_content_id_1     +
-+--------------------------+
-+    your_content_id_2     +
-+--------------------------+
-+    your_content_id_3     +
-+--------------------------+
-```
-
-## Search Queries
-
-Now search query are handled by this library 
-
-```php
-<?php
-$searchQuery = $manager->search()->query("Text to search");
-
-$results = $manager->get($searchQuery);
-```
-
-### Complex queries
-
-Search queries works chaining objects. You can start a new query
-using ```search()``` method.
-
-```php
-<?php
-$searchQuery = $manager->search()
-    ->relevancy() //Force date relevancy
-    ->query("Text to search")
-    ->facet("category")
-    ->range() //maybe much more complex
-    ->filterBy("category", "Web")
-    ->network("a-partner-sitekey")
-;
-
-$results = $manager->get($searchQuery);
-```
-
-### Query
-
-The query is what you want to search, it could be a sentence or
-simple a word but not empty.
-
-### Relevancy
-
-Relevancy is the boost operator that indicates that this query
-must works with a relevancy on a particular rule. Possible 
-values actually are only: date and default.
-
- * Date indicates that are better new contents (using ```publish_date```
-field)
- * Default for a natural query execution.
- 
-### Filter By
-
-This method indicates that you want to reduce your result set. You
-can chain this operator.
-
-```php
-<?php
-$search->filterBy("a", "b")->filterBy("c", "d");
-```
-
-### Facet
-
-Facet operator is the "group by" and "count". You can chain this
-operator.
-
-```php
-<?php
-$search->facet("category")->facet("author");
-```
-
-### Network
-
-If you have a network of sites that you query not only your
-repository but involves other partner indexes for having more
-results. You can chain this operator
-
-```php
-<?php
-$search->network("first")->network("second");
-``` 
-
-Is not useful including your sitekey because the sistem involve
-it by itself.
-
-### Ranges
-
-Range queries is a group and count with filter. It's a complex query. 
-When you are asking for a range query the system filter results automatically on 
-your range, after that group and counting elements into each group.
-That's enabled your software for move users into a fine grain searching 
-system.  
-
-Here the range method prototype
-
-```php
-<?php
-public function range($type=self::RANGE_DATE, 
-            $field="publish_date", 
-            $gap="1", 
-            $direction=self::DIRECTION_FORWARD, 
-            $from="1900-01-01T00:00:00Z", 
-            $to=self::NOW, 
-            $value=self::RANGE_DATE_YEAR);
-```
-
-Using into a call
-
-```php
-<?php
-//Backward range query
-$searchQuery = $manager->search()
-    ->query("Text to search")
-    ->range("date", "publish_date", 2, "-", "NOW", "2000-01-01T00:00:00Z")
-    ->filterBy("category", "meteo")
-;
-
-$results = $manager->get($searchQuery);
-```
-
-You can chain this operator.
-
 ## Library autoloader
 
-This library provides a simple autoloader. You can 
+This library provides a simple autoloader. You can
 require for ```UpCloo/Autoloader.php```. That's it. See this
 running example:
 
@@ -203,7 +38,7 @@ First of all download the latest phar archive from the download section.
 After that you can use like this:
 
 ```php
-<?php 
+<?php
 require_once 'upcloo-sdk.phar';
 
 $manager = UpCloo_Manager::getInstance();
@@ -218,8 +53,8 @@ Consider that the PHAR archive autoload all the library by it self.
 If you want to run tests and get the reports of coverage you can
 simply use the ```phpunit```.
 
-For more information on ```phpunit``` consider 
-[the project page](http://www.phpunit.de/manual/current/en/) 
+For more information on ```phpunit``` consider
+[the project page](http://www.phpunit.de/manual/current/en/)
 
 ```
 $ phpunit
