@@ -45,25 +45,11 @@ class UpCloo_Manager
     private static $_instance = false;
 
     /**
-     * The username
-     *
-     * @var string
-     */
-    private $_username;
-
-    /**
      * The sitekey
      *
      * @var string
      */
     private $_sitekey;
-
-    /**
-     * The password
-     *
-     * @var string
-     */
-    private $_password;
 
     /**
      * @var UpCloo_Client_UpCloo
@@ -76,12 +62,6 @@ class UpCloo_Manager
      * @var array
      */
     private $_virtualSitekeys = false;
-
-    /**
-     *
-     * @var PDO
-     */
-    private $_storage;
 
     /**
      * Constructor is protected for singleton pattern
@@ -144,40 +124,13 @@ class UpCloo_Manager
     /**
      * Set credentials
      *
-     * @param string $username
      * @param string $sitekey
-     * @param string $password
      */
-    public function setCredential($username, $sitekey, $password)
+    public function setCredential($sitekey)
     {
-        $this->setUsername($username);
         $this->setSiteKey($sitekey);
-        $this->setPassword($password);
 
         return $this;
-    }
-
-    /**
-     * Set the Username
-     *
-     * @param string $username
-     * @return UpCloo_Manager
-     */
-    public function setUsername($username)
-    {
-        $this->_username = $username;
-
-        return $this;
-    }
-
-    /**
-     * Retrive the actual username
-     *
-     * @return string
-     */
-    public function getUsername()
-    {
-        return $this->_username;
     }
 
     /**
@@ -201,29 +154,6 @@ class UpCloo_Manager
     public function getSiteKey()
     {
         return $this->_sitekey;
-    }
-
-    /**
-     * Set the password
-     *
-     * @param string $password
-     * @return UpCloo_Manager
-     */
-    public function setPassword($password)
-    {
-        $this->_password = $password;
-
-        return $this;
-    }
-
-    /**
-     * Retrive the actual password
-     *
-     * @return string The password
-     */
-    public function getPassword()
-    {
-        return $this->_password;
     }
 
     /**

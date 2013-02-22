@@ -36,9 +36,9 @@ class UpCloo_Factory
      * Create an UpCloo instance using the
      * factory method.
      *
-     * @param unknown_type $clientName
+     * @param string $clientName
      * @param array $options
-     * @throws UpCloo_Model_Exception
+     * @throws RuntimeException
      *
      * @return UpCloo_Manager
      */
@@ -49,7 +49,7 @@ class UpCloo_Factory
         if (!@class_exists($clientName)) {
             $prefix = 'UpCloo_Client';
             if (!@class_exists($prefix . "_" . $clientName)) {
-                throw new UpCloo_Model_Exception("You have to use an existing client");
+                throw new RuntimeException("You have to use an existing client");
             } else {
                 $clientName = $prefix . "_" . $clientName;
             }
@@ -58,15 +58,9 @@ class UpCloo_Factory
         $client = new $clientName();
         $upcloo->setClient($client);
 
-        $username = array_key_exists("username", $options) ? $options["username"] : 'corley';
         $sitekey = array_key_exists("sitekey", $options) ? $options["sitekey"] : '';
-        $password = array_key_exists("password", $options) ? $options["password"] : '';
 
-        $upcloo->setCredential($username, $sitekey, $password);
-
-        if (array_key_exists("storage", $options)) {
-            $upcloo->useStorage($options["storage"]);
-        }
+        $upcloo->setCredential($sitekey);
 
         return $upcloo;
     }

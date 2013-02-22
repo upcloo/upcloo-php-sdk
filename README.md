@@ -42,7 +42,7 @@ After that you can use like this:
 require_once 'upcloo-sdk.phar';
 
 $manager = UpCloo_Manager::getInstance();
-$manager->setCredential("username", "sitekey", "password");
+$manager->setCredential("it-xx00XXxxx");
 
 ```
 
