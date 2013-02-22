@@ -1,4 +1,4 @@
-# UpCloo PHP SDK [![Build Status](https://secure.travis-ci.org/wdalmut/upcloo-php-sdk.png)](http://travis-ci.org/wdalmut/upcloo-php-sdk?branch=master)
+# UpCloo PHP SDK [![Build Status](https://travis-ci.org/wdalmut/upcloo-php-sdk.png?branch=master)](https://travis-ci.org/wdalmut/upcloo-php-sdk)
 
 This library is intended for working with PHP 5.2+
 
