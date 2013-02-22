@@ -1,0 +1,20 @@
+[
+    {
+        "title": "WordPress integration with AWS - Part 2",
+        "image": "http://www.gabrielemittica.com/files/2012/06/immagini_contenuti/26/icona_t.png",
+        "url": "http://www.gabrielemittica.com/cont/guide/wordpress-integration-with-aws-part-2/26/1.html",
+        "type": "adv-content"
+    },
+    {
+        "title": "Amazon SNS – Simple Notification Service",
+        "image": false,
+        "url": "http://walterdalmut.com/2011/11/13/amazon-sns-simple-notification-service/",
+        "type": "content"
+    },
+    {
+        "title": "Zend\\Di impressioni – ZF2",
+        "image": false,
+        "url": "http://walterdalmut.com/2012/01/08/zend-di-impressioni-zf2/",
+        "type": "content"
+    }
+]
