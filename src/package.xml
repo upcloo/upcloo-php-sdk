@@ -7,7 +7,7 @@
  <channel>pear.corley.it</channel>
  <summary>UpCloo PHP SDK, correlations and searches in the cloud.</summary>
  <description>
-   UpCloo is a cloud based and fully hosted indexing engine that helps you 
+   UpCloo is a cloud based and fully hosted indexing engine that helps you
 to create incredible and automatic correlations between contents of your website.
  </description>
  <lead>
@@ -22,11 +22,11 @@ to create incredible and automatic correlations between contents of your website
    <email>gabriele.mittica at corley.it</email>
    <active>yes</active>
  </contributor>
- <date>2012-08-02</date>
- <time>20:20:00</time>
+ <date>2013-02-22</date>
+ <time>17:20:00</time>
  <version>
-  <release>0.13.1</release>
-  <api>0.13.1</api>
+  <release>0.14.0</release>
+  <api>0.14.0</api>
  </version>
  <stability>
   <release>beta</release>
@@ -43,43 +43,11 @@ to create incredible and automatic correlations between contents of your website
        <dir name="Client">
          <file role="php" name="ClientInterface.php" />
          <file role="php" name="UpCloo.php" />
-         <file role="php" name="UpClooMock.php" />
        </dir>
        <dir name="Http">
          <file role="php" name="Client.php" />
          <file role="php" name="Exception.php" />
          <file role="php" name="Response.php" />
-       </dir>
-       <dir name="Model">
-         <file role="php" name="Base.php" />
-         <file role="php" name="Exception.php" />
-         <file role="php" name="Search.php" />
-         <dir name="Search">
-           <file role="php" name="Response.php" />
-         </dir>
-       </dir>
-       <dir name="Zend">
-         <dir name="Application">
-           <dir name="Resource">
-             <file role="php" name="Exception.php"/>
-             <file role="php" name="Upcloo.php" />
-           </dir>
-         </dir>
-         <dir name="Controller">
-           <dir name="Action">
-             <dir name="Helper">
-               <file role="php" name="Upcloo.php" />
-             </dir>
-           </dir>  
-           <dir name="Plugin">
-             <file role="php" name="UpClooRemoteImporter.php"/>
-           </dir>
-         </dir>
-         <dir name="View">
-           <dir name="Helper">
-             <file role="php" name="Upcloo.php"/>
-           </dir>
-         </dir>
        </dir>
      </dir>
    </dir>

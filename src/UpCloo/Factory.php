@@ -1,8 +1,8 @@
-<?php 
+<?php
 /**
- * 
+ *
  * UpCloo Factory
- * 
+ *
  * This class implements the Factory method for UpCloo
  * Manager.
  *
@@ -10,7 +10,7 @@
  * @package UpCloo
  * @license MIT
  *
- * Copyright (C) 2012 Corley S.R.L.
+ * Copyright (C) 2012 UpCloo Ltd.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy of
  * this software and associated documentation files (the "Software"), to deal in
@@ -18,7 +18,7 @@
  * use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies
  * of the Software, and to permit persons to whom the Software is furnished to do
  * so, subject to the following conditions:
- * 
+ *
  * The above copyright notice and this permission notice shall be included in all
  * copies or substantial portions of the Software.
  *
@@ -33,41 +33,41 @@
 class UpCloo_Factory
 {
     /**
-     * Create an UpCloo instance using the 
+     * Create an UpCloo instance using the
      * factory method.
-     * 
+     *
      * @param unknown_type $clientName
      * @param array $options
      * @throws UpCloo_Model_Exception
-     * 
+     *
      * @return UpCloo_Manager
      */
     public static function factory($clientName = 'UpCloo', array $options = array())
     {
         $upcloo = new UpCloo_Manager();
-        
+
         if (!@class_exists($clientName)) {
             $prefix = 'UpCloo_Client';
             if (!@class_exists($prefix . "_" . $clientName)) {
                 throw new UpCloo_Model_Exception("You have to use an existing client");
             } else {
-                $clientName = $prefix . "_" . $clientName; 
+                $clientName = $prefix . "_" . $clientName;
             }
         }
-        
+
         $client = new $clientName();
         $upcloo->setClient($client);
-        
+
         $username = array_key_exists("username", $options) ? $options["username"] : 'corley';
         $sitekey = array_key_exists("sitekey", $options) ? $options["sitekey"] : '';
         $password = array_key_exists("password", $options) ? $options["password"] : '';
-        
+
         $upcloo->setCredential($username, $sitekey, $password);
-        
+
         if (array_key_exists("storage", $options)) {
             $upcloo->useStorage($options["storage"]);
         }
-        
+
         return $upcloo;
     }
 }

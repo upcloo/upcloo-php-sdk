@@ -1,7 +1,7 @@
 {
     "name": "corley/upcloo-php-sdk",
     "description": "UpCloo PHP SDK",
-    "version":"0.13.1",
+    "version":"0.14.0",
     "type":"library",
     "keywords":["upcloo","correlation","links","related"],
     "time":"2012-08-07",
@@ -21,7 +21,7 @@
         }
     ],
     "support": {
-        "email":"info@corley.it"
+        "email":"info@upcloo.com"
     },
     "require": {
         "php": ">=5.2.4"
