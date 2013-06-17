@@ -5,3 +5,4 @@ res
 .settings
 *.phar
 *.swp
+build
