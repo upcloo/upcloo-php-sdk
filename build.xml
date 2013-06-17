@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <project name="name-of-project" default="build" basedir=".">
- <target name="build" depends="prepare,phpunit"/>
+ <target name="build" depends="prepare,phpunit,pdepend"/>
 
  <target name="clean" description="Cleanup build artifacts">
      <delete dir="${basedir}/build/api"/>
